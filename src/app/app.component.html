@@ -1,0 +1,24 @@
+<div class="ui segment">
+  <div class="ui inverted red top fixed stacked menu">
+    <a class="item" routerLink="/dashboard"><i class="home icon"></i>Dashboard </a>
+    <a class="item" routerLink="/donate-blood"><i class="theme icon"></i>Donate Blood</a>
+    <a class="item" routerLink="/blood-bank"><i class="add circle icon"></i>Blood Banks</a>
+
+    <a class="item right">
+        <i class="doctor icon big"></i>|&nbsp;
+        <a class="pointing ui dropdown dd" routerLink="/donate-blood">&#160; Erastus Nathingo
+          <div class="menu hidden">
+            <div class="item">Profile</div>
+            <div class="item">Settings</div>
+            <div class="ui divider"></div>
+            <div class="item">Logout</div>
+          </div>
+        </a>
+
+    </a>
+  </div>
+  <div class="ui segment">
+    <br/><br/>
+    <router-outlet></router-outlet>
+  </div>
+</div>
