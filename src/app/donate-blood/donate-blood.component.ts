@@ -33,6 +33,8 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    
+    $('.menu .step').tab();
   }
 
   private createForm = (data?: any): void => {
@@ -55,6 +57,11 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
 
   private notify = (): void=>{
     this.pnotify.error("Yes", 4,"This mofoe Works");
+  }
+
+  private changePage = (nextPage: string, currentPage:string): void =>{
+    $(currentPage).transition('bounce');
+   /// $(nextPage).transition('slide left');
   }
 
   personalInfo() {
