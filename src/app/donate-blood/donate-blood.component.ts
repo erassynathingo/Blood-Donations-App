@@ -20,19 +20,19 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
 
   // use formbuilder to simplify syntax
   constructor(private _fb: FormBuilder, private pnotify: Pnotify) {
-    this.createForm();
+
+
   }
 
   ngAfterViewInit() {
-    $('#dateOfBirth').calendar({
-      startMode: 'year',
-      type: 'date'
-    });
-    $('.ui.dropdown').dropdown();
   }
 
 
   ngOnInit(): void {
+    this.createForm();
+    // Initiating Calendar Functions
+    this.initSemanticFunctions();
+
   }
 
   private createForm = (data?: any): void => {
@@ -40,6 +40,16 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
       personalInfo: this.personalInfo()
     })
     this.observeForm();
+  }
+
+  private initSemanticFunctions = () : void=>{
+    $('#dateOfBirth').calendar({
+      startMode: 'year',
+      type: 'date'
+    });
+    $('.ui.dropdown').dropdown();
+    $('.ui.radio.checkbox').checkbox();
+    $('.ui.checkbox').checkbox();
   }
 
   private submitForm = (model: DonationApplication, valid: boolean): void => {
@@ -51,10 +61,6 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     this.donorForm.valueChanges.subscribe(value => {
       Logger.info(value);
     })
-  }
-
-  private notify = (): void=>{
-    this.pnotify.error("Yes", 4,"This mofoe Works");
   }
 
   personalInfo() {

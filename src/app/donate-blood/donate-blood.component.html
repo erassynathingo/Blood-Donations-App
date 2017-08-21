@@ -52,7 +52,7 @@
                   </select>
               </div>
 
-              <div class="twelve wide field">
+              <div class="twelve wide field required">
                 <label>First Name</label>
                 <input type="text" name="firstName" formControlName="firstName" placeholder="First Name" required>
               </div>
@@ -62,7 +62,7 @@
                 <input type="text" name="maidenName" formControlName="maidenName" placeholder="First Name">
               </div>
 
-              <div class="twelve wide field">
+              <div class="twelve wide field required">
                 <label>Last Name</label>
                 <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name">
               </div>
@@ -70,7 +70,7 @@
           </div>
           <div class="field">
             <div class="fields">
-              <div class="three ui calendar wide field" id="dateOfBirth">
+              <div class="three ui calendar wide field required" id="dateOfBirth">
                 <label>Date Of Birth</label>
                 <div class="ui input left icon">
                   <i class="calendar icon"></i>
@@ -426,7 +426,7 @@
           <h4 class="ui dividing red header">Medical/Emergency Information</h4>
 
           <div class="field">
-            <div class="fields" formGroupName="familyDoctor">
+            <div class="three fields" formGroupName="familyDoctor">
               <div class="four ui wide field">
                 <label class="default text">Name of Family Doctor</label>
                 <input type="text" formControlName="firstName" name="firstName">
@@ -469,8 +469,41 @@
           </div>
 
           <h5 class="ui dividing red header"></h5>
+          <br/>
+          <div class="field">
+            <div class="ui form inline large fields">
+              <div class="ui field">
+                <label class="default text">Was your Last donation given outside Namibia?</label>
+                <div class="ui radio checkbox">
+                  <input type="radio" name="donationInNamibia" checked="" tabindex="0" class="hidden">
+                  <label>Yes</label>
+                </div>
+                <div class="ui radio checkbox">
+                  <input type="radio" name="donationInNamibia" checked="" tabindex="0" class="hidden">
+                  <label>No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui inline fields">
+              <div class="ui required field">
+                <div class="ui checkbox">
+                  <label class="default text">Namibia?</label>
+                  <input type="checkbox" tabindex="0" class="hidden">
+                </div>
+              </div>
+              <div class="ui calendar field required" id="dateOfBirth">
+                <label>Date</label>
+                <div class="ui input left icon">
+                  <i class="calendar icon"></i>
+                  <input type="text" placeholder="Date">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
           <div class="ui button green" tabindex="0" (click)="(submitForm(donorForm))">Submit Order</div>
-          <div class="ui button blue" tabindex="0" (click)="(notify())">Submit</div>
 
         </div>
       </form>
