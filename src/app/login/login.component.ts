@@ -3,14 +3,15 @@ import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-    selector: 'login-template',
-    styleUrls: ['./login.component.css'],
-    templateUrl: './login.component.html'
+  selector: 'login-template',
+  styleUrls: ['./login.component.css'],
+  templateUrl: './login.component.html'
 })
 
 
-export class LoginComponent implements OnInit{ 
-    ngOnInit(): void{
+export class LoginComponent implements OnInit {
+  ngOnInit(): void {
 
-    }
+    $('.ui.dropdown').dropdown();
+  }
 }

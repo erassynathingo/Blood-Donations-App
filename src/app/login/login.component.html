@@ -1,0 +1,44 @@
+<div class="ui middle aligned center aligned grid login">
+  <div class="column">
+    <div class="ui card centered raised stackable">
+      <div class="ui tiny">
+        <div class="ui fluid centered Mini image">
+          <img src="../assets/nambts_logo.png" alt="nambts Logo">
+        </div>
+      </div>
+      <div class="content">
+        <div class="ui horizontal divider">
+          Login
+        </div>
+        <form method="get" class="ui center large form">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="email" placeholder="E-mail address">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" placeholder="Password">
+            </div>
+          </div>
+          <div class="field">
+            <label>Role</label>
+            <select class="ui dropdown" name="gender">
+                <option value="doctor"><i class="doctor blue icon"></i>Doctor</option>
+                <option value="donor"><i class="theme red icon"></i>Donor</option>
+                <option value="admin"><i class="user green icon"></i>Admin</option>
+              </select>
+          </div>
+          <div class="ui fluid large red submit button" routerLink="/donate-blood">Login</div>
+          <div class="ui error message"></div>
+
+        </form>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

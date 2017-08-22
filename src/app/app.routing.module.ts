@@ -11,6 +11,7 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'donate-blood', component: DonateBloodComponent },
     { path: 'blood-bank', component: BloodBankComponent },
+    { path: 'login', component: LoginComponent },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ]
 
