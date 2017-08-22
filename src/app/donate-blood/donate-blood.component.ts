@@ -29,10 +29,15 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+<<<<<<< HEAD
     this.createForm();
     // Initiating Calendar Functions
     this.initSemanticFunctions();
 
+=======
+    
+    $('.menu .step').tab();
+>>>>>>> 35c87e18960d42a630e143636fe4d04e776dbc10
   }
 
   private createForm = (data?: any): void => {
@@ -63,6 +68,18 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     })
   }
 
+<<<<<<< HEAD
+=======
+  private notify = (): void=>{
+    this.pnotify.error("Yes", 4,"This mofoe Works");
+  }
+
+  private changePage = (nextPage: string, currentPage:string): void =>{
+    $(currentPage).transition('bounce');
+   /// $(nextPage).transition('slide left');
+  }
+
+>>>>>>> 35c87e18960d42a630e143636fe4d04e776dbc10
   personalInfo() {
     return this._fb.group({
       title: ['', [Validators.required, Validators.maxLength(5)]],
