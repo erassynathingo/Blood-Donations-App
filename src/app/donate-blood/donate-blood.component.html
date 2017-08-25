@@ -2,6 +2,7 @@
   <br/>
   <div class="center aligned grid middle">
     <h2>Please Fill in the From</h2>
+    <br/>
   </div>
   <div>
     <div name="static_headers" class="ui sticky">
@@ -450,7 +451,7 @@
             </div>
           </div>
           <div class="field">
-            <div class="fields" formGroupName="emergencyContact">
+            <div class="three fields" formGroupName="emergencyContact">
               <div class="four ui wide field">
                 <label class="default text">Name of Emergency Contact</label>
                 <input type="text" formControlName="firstName" name="firstName">
@@ -506,29 +507,29 @@
 
           </div>
 
-          <div class="ui button green" tabindex="0" (click)="(submitForm(donorForm))">Submit Order</div>
+          <div class="ui button green" tabindex="0" (click)="(submitForm(donorForm.value))">Submit Order</div>
           <div class="ui button blue" tabindex="0" (click)="(changePage('.health_info','.personalInformation'))">Next</div>
 
         </div>
         <div class="health_info tab ui segment" data-tab="healthInfo">
           <h1>Health form</h1>
           <div class="field">
-            <div class="fields" formGroupName="emergencyContact">
+            <div class="fields">
               <div class="four ui wide field">
                 <label class="default text">Name of Emergency Contact</label>
-                <input type="text" formControlName="firstName" name="firstName">
+                <input type="text" name="firstName">
               </div>
               <div class="four ui wide field">
                 <label class="default text">Last Name of Emergency Contact</label>
-                <input type="text" formControlName="lastName" name="lastName">
+                <input type="text" name="lastName">
               </div>
-              <div class="four ui wide field" formGroupName="contactNumber">
+              <div class="four ui wide field">
                 <label class="default text">Contact Number of Emergency Contact</label>
                 <div class="ui labeled input">
                   <div class="ui label">
                     +264
                   </div>
-                  <input type="tel" formControlName="number" name="contactNumber">
+                  <input type="tel" name="contactNumber">
                 </div>
               </div>
             </div>

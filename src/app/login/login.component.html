@@ -10,29 +10,31 @@
         <div class="ui horizontal divider">
           Login
         </div>
-        <form method="get" class="ui center large form">
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="text" name="email" placeholder="E-mail address">
+        <form [formGroup]="loginForm" novalidate class="ui center large form">
+          <div class="form-group">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" formControlName="username" name="username" placeholder="Username">
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" formControlName="password" placeholder="Password">
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label>Role</label>
-            <select class="ui dropdown" name="gender">
-                <option value="doctor"><i class="doctor blue icon"></i>Doctor</option>
-                <option value="donor"><i class="theme red icon"></i>Donor</option>
-                <option value="admin"><i class="user green icon"></i>Admin</option>
+            <div class="field">
+              <label>Role</label>
+              <select class="ui dropdown" formControlName="role" name="role">
+                <option value="Doctor"><i class="doctor blue icon"></i>Doctor</option>
+                <option value="Donor"><i class="theme red icon"></i>Donor</option>
+                <option value="Admin"><i class="user green icon"></i>Admin</option>
               </select>
+            </div>
+            <div class="ui fluid large red submit button" (click)='login(loginForm.value)' >Login</div>
+            <div class="ui error message"></div>
           </div>
-          <div class="ui fluid large red submit button" routerLink="/donate-blood">Login</div>
-          <div class="ui error message"></div>
 
         </form>
       </div>

@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  enableLogs: true
+  enableLogs: true,
+  baseUrl: 'http://localhost:3030'
 };

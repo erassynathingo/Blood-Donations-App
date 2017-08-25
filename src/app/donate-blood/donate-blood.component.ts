@@ -21,7 +21,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
   // use formbuilder to simplify syntax
   constructor(private _fb: FormBuilder, private pnotify: Pnotify) {
 
-
+    this.createForm();
   }
 
   ngAfterViewInit() {
@@ -29,7 +29,6 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.createForm();
     // Initiating Calendar Functions
     this.initSemanticFunctions();
     $('.menu .step').tab();

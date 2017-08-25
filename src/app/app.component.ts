@@ -9,5 +9,6 @@ export class AppComponent implements OnInit{
   title = 'Blood Donations Admin';
 
   ngOnInit(): void{
+    $('.ui.dropdown').dropdown();
   }
 }
