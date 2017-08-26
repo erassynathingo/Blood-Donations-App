@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
   }
-  private login = (model: Credentials): void=>{
+  private login = (model: Object): void=>{
     Logger.log(model);
     this.apiFunctions.login('/auth', model).subscribe(user=>this.User = user, error=>{
       this.errorMessage = <any>error;

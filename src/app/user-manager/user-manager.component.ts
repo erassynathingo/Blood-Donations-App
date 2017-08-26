@@ -7,5 +7,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class UserManagerComponent implements OnInit {
 
-	ngOnInit() { }
+  ngOnInit() { }
+
+
 }

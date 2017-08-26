@@ -1,7 +1,7 @@
 <div class="ui donorForm segment">
   <br/>
   <div class="center aligned grid middle">
-    <h2>Please Fill in the From</h2>
+      <h2 class="ui left floated header">Please Fill in the From</h2>
     <br/>
   </div>
   <div>
@@ -21,7 +21,7 @@
                     <!--<div class="description">Enter billing information</div>-->
                 </div>
             </a>
-        <a class="step riskInfoStep" data-tab="riskInfo">
+        <a class="step riskInfoStep" data-tab="riskBeaviour">
                 <i class="warning sign icon red"></i>
                 <div class="content">
                     <div class="title">Risk Behaviour</div>
@@ -41,8 +41,11 @@
     <br/>
     <div class="lightslategrey formSegment">
       <form class="ui form" [formGroup]="donorForm" novalidate (ngSubmit)="submitForm(donorForm)">
+
+        <!-- PERSONAL INFORMATION SEGMENT -->
         <div formGroupName="personalInfo" data-tab="personalInfo" id="personalInformation" class="ui tab segment personalInformation">
 
+            <h5 class="ui dividing red header">Personal</h5>
           <div class="field">
             <div class="fields">
               <div class="three wide field">
@@ -68,7 +71,7 @@
 
               <div class="twelve wide field required">
                 <label>Last Name</label>
-                <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name">
+                <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name" required>
               </div>
             </div>
           </div>
@@ -472,46 +475,56 @@
             </div>
           </div>
 
-          <h5 class="ui dividing red header"></h5>
+          <h5 class="ui dividing red header">Other Donations</h5>
           <br/>
           <div class="field">
-            <div class="ui form inline large fields">
-              <div class="ui field">
-                <label class="default text">Was your Last donation given outside Namibia?</label>
-                <div class="ui radio checkbox">
-                  <input type="radio" name="donationInNamibia" checked="" tabindex="0" class="hidden">
-                  <label>Yes</label>
-                </div>
-                <div class="ui radio checkbox">
-                  <input type="radio" name="donationInNamibia" checked="" tabindex="0" class="hidden">
-                  <label>No</label>
+            <div class="ui fields">
+              <div class="field">
+                <div class="ui toggle checkbox subFormToggle red" (click)="(revealSubForm())">
+                  <label>Last donation given outside Namibia?</label>
+                  <input type="checkbox" name="gift" tabindex="0" id="subFormToggle" class="hidden">
                 </div>
               </div>
             </div>
 
-            <div class="ui inline fields">
-              <div class="ui required field">
-                <div class="ui checkbox">
-                  <label class="default text">Namibia?</label>
-                  <input type="checkbox" tabindex="0" class="hidden">
+            <div class="ui inline segment" id="subForm" formGroupName="lastDonationInNamibia">
+              <div class="ui required fields">
+                <div class="four ui wide field">
+                  <label class="default text">Location</label>
+                  <input type="text" formControlName="location" tabindex="0">
                 </div>
-              </div>
-              <div class="ui calendar field required" id="dateOfBirth">
-                <label>Date</label>
-                <div class="ui input left icon">
-                  <i class="calendar icon"></i>
-                  <input type="text" placeholder="Date">
+
+                <div class="four ui wide field">
+                  <label class="default text">Previous Address</label>
+                  <input type="text" formControlName="previousAddress" tabindex="0">
+                </div>
+
+                <div class="ui calendar four wide field required" id="injectionDate">
+                  <label>Date</label>
+                  <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input type="text" formControlName="date" placeholder="Date">
+                  </div>
+                </div>
+
+                <div class="four ui wide field">
+                  <label class="default text">Shots Given</label>
+                  <input type="number" formControlName="howManyDonationGiven" tabindex="0">
                 </div>
               </div>
             </div>
+            <br/>
 
           </div>
 
-          <div class="ui button green" tabindex="0" (click)="(submitForm(donorForm.value))">Submit Order</div>
-          <div class="ui button blue" tabindex="0" (click)="(changePage('.health_info','.personalInformation'))">Next</div>
+          <div class="ui button blue" tabindex="0" (click)="(changePage('.personalInformation'))">Next</div>
 
         </div>
-        <div class="health_info tab ui segment" data-tab="healthInfo">
+        <!-- END -->
+
+
+        <!-- HEALTH INFO SEGMENT -->
+        <div class="health_info tab ui segment" formGroupName="healthInfo" data-tab="healthInfo">
           <h1>Health form</h1>
           <div class="field">
             <div class="fields">
@@ -534,7 +547,34 @@
               </div>
             </div>
           </div>
+          <br/>
+
+          <div class="ui button blue" tabindex="0" (click)="(changePage('.health_info'))">Next</div>
         </div>
+        <!-- END -->
+
+        <!-- RISK BEHAVIOUR SEGMENT -->
+        <div class="riskBeaviour tab ui segment" data-tab="riskBeaviour">
+          <h1>Risk Behaviour form</h1>
+          <br/>
+
+          <div class="ui button blue" tabindex="0" (click)="(changePage('.riskBeaviour'))">Next</div>
+
+        </div>
+
+        <!-- END -->
+
+        <!-- Declaration SEGMENT -->
+        <div class="declarationInfo tab ui segment" data-tab="declarationInfo">
+          <h1>Declaration</h1>
+
+          <div class="ui button green" tabindex="0" (click)="(submitForm(donorForm.value))">Submit Order</div>
+
+        </div>
+
+        <!-- END -->
+
+
       </form>
     </div>
 

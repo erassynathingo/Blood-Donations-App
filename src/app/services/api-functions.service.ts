@@ -29,7 +29,7 @@ export class APIFunctionsService {
     this.options = new RequestOptions({headers: this.headers});
   }
 
-  login(url: string, param: Credentials): Observable<any> {
+  login(url: string, param: Object): Observable<any> {
     let body = JSON.stringify(param);
     let path = this.baseUrl +''+ url;
     Logger.log(path);
