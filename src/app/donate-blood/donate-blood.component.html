@@ -1,7 +1,7 @@
 <div class="ui donorForm segment">
   <br/>
   <div class="center aligned grid middle">
-    <h2 class="ui left floated header">Please Fill in the From</h2>
+    <h4 class="ui left floated header">PLEASE READ CAREFULLY AND ANSWER ALL THE QUESTIONS ACCURATELY AND HONESTLY</h4>
     <br/>
   </div>
   <div>
@@ -47,7 +47,7 @@
           <h5 class="ui dividing red header">Personal</h5>
           <div class="field">
             <div class="fields">
-              <div class="three wide field">
+              <div class="three ui wide field">
                 <label>Title</label>
                 <select class="ui dropdown" formControlName="title" name="title">
                     <option value="">Title</option>
@@ -58,20 +58,25 @@
                   </select>
               </div>
 
-              <div class="twelve wide field required">
+              <div class="twelve ui wide field required">
                 <label>First Name</label>
                 <input type="text" name="firstName" formControlName="firstName" placeholder="First Name" required>
               </div>
 
-              <div class="twelve wide field">
+              <div class="twelve ui wide field">
                 <label>Maiden Name</label>
                 <input type="text" name="maidenName" formControlName="maidenName" placeholder="First Name">
               </div>
 
-              <div class="twelve wide field required">
+              <div class="twelve ui wide field required">
                 <label>Last Name</label>
                 <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name" required>
               </div>
+
+              <div class="twelve ui wide field required">
+                  <label>ID Number</label>
+                  <input type="text" name="idNumber" formControlName="idNumber" placeholder="ID Number" required>
+                </div>
             </div>
           </div>
           <div class="field">
@@ -84,7 +89,7 @@
                 </div>
               </div>
 
-              <div class="three wide field">
+              <div class="three ui wide field">
                 <label>Gender</label>
                 <select class="ui dropdown" formControlName="gender" name="gender">
                 <option value="">Gender</option>
@@ -524,11 +529,10 @@
 
         <!-- HEALTH INFO SEGMENT -->
         <div class="health_info tab ui segment" formGroupName="healthInfo" data-tab="healthInfo">
-          <h5 class="ui dividing red header">Health Questionnaire</h5>
+          <h5 class="ui dividing red header">HEALTH QUESTIONNAIRE: Your safety is as important to us as the safety of the patient</h5>
           <div class="ui right stackable two column grid">
             <div class="row">
               <div class="column">
-                <div class="ui vertical fluid menu">
                   <table class="ui compact table">
                     <thead class="full-width">
                       <tr>
@@ -579,7 +583,7 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
+                      <tr class="active">
                         <td colspan="3" style="color: blue">
                           Are you involved in an activity/occupation that might endager you or anyone else, should you become light headed or faint
                           such as:
@@ -628,7 +632,7 @@
                         </td>
                       </tr>
 
-                      <tr>
+                      <tr class="active">
                         <td colspan="3" style="color: blue">
                           Have you ever:
                         </td>
@@ -667,7 +671,6 @@
 
                     </tbody>
                   </table>
-                </div>
               </div>
               <div class="column">
                 <table class="ui compact table">
@@ -679,7 +682,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr class="active">
                       <td colspan="3" style="color: blue">
                         During the last 7 days:
                       </td>
@@ -712,7 +715,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="active">
                       <td colspan="3" style="color: blue">
                         In the past 6 months:
                       </td>
@@ -946,7 +949,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr  class="active">
                       <td colspan="3" style="color: blue">
                         Female Donors only:
                       </td>
@@ -1003,7 +1006,7 @@
                   </thead>
                   <tbody>
 
-                    <tr>
+                    <tr  class="active">
                       <td colspan="3" style="color: blue">
                         Do you have or have you ever had:
                       </td>
@@ -1139,7 +1142,7 @@
                       </td>
                     </tr>
 
-                    <tr>
+                    <tr  class="active">
                       <td colspan="3" style="color: blue">
                         Have you or your sexual partner:
                       </td>
@@ -1190,7 +1193,185 @@
 
         <!-- RISK BEHAVIOUR SEGMENT -->
         <div class="riskBeaviour tab ui segment" data-tab="riskBeaviour">
-          <h1>Risk Behaviour form</h1>
+          <div class="ui">
+
+            <h5 class="ui dividing red header">RISK BEHAVIOUR QUESTIONNAIRE: Though personal, these questions do not mean to offend, but rather identify potential risk to the patient</h5>
+            <table class="ui compact table">
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Yes</th>
+                  <th>No</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Do you or your partner have Hepatitis B, Hepatitis C, Syphilis or AIDS; Are you HIV positive; or are you taking anti-retroviral
+                    drugs?
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="HIVorARVSwithPartner" value="Yes">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="HIVorARVSwithPartner" value="No">
+                    </div>
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <td>
+                    Is your main reason for donating blood to undergo an HIV test?
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="donateReasonForHIVTest" value="Yes">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="donateReasonForHIVTest" value="No">
+                    </div>
+                  </td>
+                </tr>
+                <tr class="active">
+                  <td colspan="3" style="color: blue">
+                    In the past 6 months:
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <td>
+                    Have you had sexual activity with or without a condom with more than one partner, had casual sex, or had sex with someone
+                    whose sexual background you don't know?
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="uncertainSexualActivity" value="Yes">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="uncertainSexualActivity" value="No">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    Have you had a victim of sexual assult (e.g rape)?
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="sexualAssaultVictim" value="Yes">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="sexualAssaultVictim" value="No">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    Have you had a sexual activity with a male or female prostitute, escort or sex worker, or exchanged money, drugs, goods or
+                    favours in return for sex?
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="sexWithProstitute" value="Yes">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="ui radio">
+                      <input type="radio" name="sexWithProstitute" value="No">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr class="active">
+                  <td colspan="3" style="color: blue">
+                    General
+                  </td>
+                </tr>
+
+                <tr>
+                    <td>
+                      In the past 12 months: Have you suffered from sexually transmitted infection (STI) e.g. Syphilis, Gonorrhoea, Genital Ulcer, "VD" or "Drop"?
+                    </td>
+                    <td>
+                      <div class="ui radio">
+                        <input type="radio" name="sufferedFromSTI12months" value="Yes">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="ui radio">
+                        <input type="radio" name="sufferedFromSTI12months" value="No">
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                      <td>
+                        Have you injected yourself or been injected with illegalor non-prescribed drugs, even a long time ago or even once?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="injectedWithDrugs" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="injectedWithDrugs" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                          To your knowledge, could your sex partner have been involved in any of the activities listed above?
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="uncertainOfPartnerSexualPast" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="uncertainOfPartnerSexualPast" value="No">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="3"><br/></td>
+                      </tr>
+
+                      <tr class="positive">
+                          <td>
+                            Do you consider your blood safe for transfusion to a patient?
+                          </td>
+                          <td>
+                            <div class="ui radio">
+                              <input type="radio" name="bloodSafeForTransfusion" value="Yes">
+                            </div>
+                          </td>
+                          <td>
+                            <div class="ui radio">
+                              <input type="radio" name="bloodSafeForTransfusion" value="No">
+                            </div>
+                          </td>
+                        </tr>
+
+
+              </tbody>
+            </table>
+          </div>
           <br/>
 
           <div class="ui button blue" tabindex="0" (click)="(changePage('.riskBeaviour'))">Next</div>
@@ -1201,7 +1382,7 @@
 
         <!-- Declaration SEGMENT -->
         <div class="declarationInfo tab ui segment" data-tab="declarationInfo">
-          <h1>Declaration</h1>
+            <h5 class="ui dividing red header">DECLARATION: Please Read this section carefully & agree before submiting the form</h5>
 
           <div class="ui button green" tabindex="0" (click)="(submitForm(donorForm.value))">Submit Order</div>
 

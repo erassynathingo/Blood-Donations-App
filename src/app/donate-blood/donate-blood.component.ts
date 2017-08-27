@@ -35,7 +35,8 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     Logger.info("Creating form");
     this.donorForm = this._fb.group({
       personalInfo: this.personalInfo(),
-      healthInfo: this.healthInfo()
+      healthInfo: this.healthInfo(),
+      riskInfo: this.riskInfo()
     });
     this.observeForm();
   };
@@ -116,6 +117,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
       firstName: ["", [Validators.required]],
       lastName: ["", [Validators.required]],
       maidenName: ["", [Validators.required]],
+      idNumber: ["", [Validators.required]],
       dateOfBirth: ["", [Validators.required]],
       gender: ["", [Validators.required]],
       language: ["", [Validators.required]],
@@ -208,5 +210,21 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
         receivedBloodTransInLast6Months: ["", [Validators.required]]
       })
     });
+  }
+
+  riskInfo(){
+    return this._fb.group({
+      HIVorARVSwithPartner: ["", [Validators.required]],
+      donateReasonForHIVTest: ["", [Validators.required]],
+      inPast6Months: this._fb.group({
+        uncertainSexualActivity: ["", [Validators.required]],
+        sexualAssaultVictim: ["", [Validators.required]],
+        sexWithProstitute: ["", [Validators.required]]
+      }),
+      sufferedFromSTI12months: ["", [Validators.required]],
+      injectedWithDrugs:["", [Validators.required]],
+      uncertainOfPartnerSexualPast: ["", [Validators.required]],
+      bloodSafeForTransfusion: ["", [Validators.required]]
+    })
   }
 }
