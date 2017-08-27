@@ -1,7 +1,7 @@
 <div class="ui donorForm segment">
   <br/>
   <div class="center aligned grid middle">
-      <h2 class="ui left floated header">Please Fill in the From</h2>
+    <h2 class="ui left floated header">Please Fill in the From</h2>
     <br/>
   </div>
   <div>
@@ -43,9 +43,8 @@
       <form class="ui form" [formGroup]="donorForm" novalidate (ngSubmit)="submitForm(donorForm)">
 
         <!-- PERSONAL INFORMATION SEGMENT -->
-        <div formGroupName="personalInfo" data-tab="personalInfo" id="personalInformation" class="ui tab segment personalInformation">
-
-            <h5 class="ui dividing red header">Personal</h5>
+        <div formGroupName="personalInfo" data-tab="personalInfo" id="personalInformation" class="ui tab active segment personalInformation">
+          <h5 class="ui dividing red header">Personal</h5>
           <div class="field">
             <div class="fields">
               <div class="three wide field">
@@ -525,25 +524,661 @@
 
         <!-- HEALTH INFO SEGMENT -->
         <div class="health_info tab ui segment" formGroupName="healthInfo" data-tab="healthInfo">
-          <h1>Health form</h1>
-          <div class="field">
-            <div class="fields">
-              <div class="four ui wide field">
-                <label class="default text">Name of Emergency Contact</label>
-                <input type="text" name="firstName">
-              </div>
-              <div class="four ui wide field">
-                <label class="default text">Last Name of Emergency Contact</label>
-                <input type="text" name="lastName">
-              </div>
-              <div class="four ui wide field">
-                <label class="default text">Contact Number of Emergency Contact</label>
-                <div class="ui labeled input">
-                  <div class="ui label">
-                    +264
-                  </div>
-                  <input type="tel" name="contactNumber">
+          <h5 class="ui dividing red header">Health Questionnaire</h5>
+          <div class="ui right stackable two column grid">
+            <div class="row">
+              <div class="column">
+                <div class="ui vertical fluid menu">
+                  <table class="ui compact table">
+                    <thead class="full-width">
+                      <tr>
+                        <th>Question</th>
+                        <th>Yes</th>
+                        <th>No</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          Are you feeling well & in good health today?
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="feelingWellandInGooHealth" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="feelingWellandInGooHealth" value="No">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Have you eaten in the last 4 hours?</td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="eatenInLastFourHours" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="eatenInLastFourHours" value="No">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Have you ever been refused as a blood donor or told not to donate?</td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="everBeenRefusedAsBloodDonor" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="everBeenRefusedAsBloodDonor" value="No">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" style="color: blue">
+                          Are you involved in an activity/occupation that might endager you or anyone else, should you become light headed or faint
+                          such as:
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Driving public transport or heavy duty vehicle, working on scaffolding or working with machinery?</td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="drivingPublicTransport" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="drivingPublicTransport" value="No">
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>Piloting an aircraft, skydiving, deep-sea diving or mountaineering?</td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="pilotingAircraft" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="pilotingAircraft" value="No">
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr>
+                        <td>Are you expecting to undergo an operation in the next 2 months?</td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="operationInNextTwoMonths" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="operationInNextTwoMonths" value="No">
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td colspan="3" style="color: blue">
+                          Have you ever:
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>Participated in a drug/vaccine trial?</td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="participatedInDrugTrial" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="participatedInDrugTrial" value="No">
+                          </div>
+                        </td>
+                      </tr>
+
+
+
+                      <tr>
+                        <td>Taken Tigason or Neotigason?</td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="takenTigasonOrNeotigason" value="Yes">
+                          </div>
+                        </td>
+                        <td>
+                          <div class="ui radio">
+                            <input type="radio" name="takenTigasonOrNeotigason" value="No">
+                          </div>
+                        </td>
+                      </tr>
+
+
+                    </tbody>
+                  </table>
                 </div>
+              </div>
+              <div class="column">
+                <table class="ui compact table">
+                  <thead class="full-width">
+                    <tr>
+                      <th>Question</th>
+                      <th>Yes</th>
+                      <th>No</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="3" style="color: blue">
+                        During the last 7 days:
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Have you take asprin, painkillers, or anti-inflammatorymedication (Compral, Grandpa)?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="takenMedication" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="takenMedication" value="No">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Have you been to the dentist?</td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="beenToTheDentist" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="beenToTheDentist" value="No">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="3" style="color: blue">
+                        In the past 6 months:
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Have you had an injection, vaccination or inocculation?</td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadVaccination" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadVaccination" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Have you ever taken Roaccutane, Proscar-, Androcur, Propecia or Avodart or been exposed to industrial
+                        chemicals at work?</td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="exposedToInductrialChemicals" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="exposedToInductrialChemicals" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>Have you been ill, received any treatment or taken any medication?</td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="receivedTreatment" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="receivedTreatment" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Have you been under a doctor's care, undergone surgery or a diagnostic procedure, suffered a major
+                        illness?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="undergoneSurgery" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="undergoneSurgery" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Have you had an accidental exposure to blood or body fluids?</td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="exposedToBlood" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="exposedToBlood" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Have you been tattooed, had ear/body piercing, acupuncture, circumcision, scarification, "blood sharing"?</td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadPiercing" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadPiercing" value="No">
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui right stackable two column grid">
+            <div class="row">
+              <div class="column">
+                <table class="ui compact table">
+                  <thead class="full-width">
+                    <tr>
+                      <th>Question</th>
+                      <th>Yes</th>
+                      <th>No</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <td>
+                        Have you ever had yellow jaundice (except jaundice at birth), hepatitis or liver disease?
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="hadHepatitisBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="hadHepatitisBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        In the past 6 months, have you had close contact with a person with yellow jaundice or viral hepatitis, or have you been
+                        given hepatitis B immunoglobulin?
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="givenHepatitisBinlast6Months" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="givenHepatitisBinlast6Months" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Have you had malaria in the past 36 months?
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="hadMalariaInPast36Months" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="hadMalariaInPast36Months" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Have you visited a malaria area in the past 3 weeks?
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="visitedMalariaAreainPast3Weeks" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="visitedMalariaAreainPast3Weeks" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Have you ever received a tissue or organ transplant , e.g cornea, dura mater, kidney, liver, organ transplant?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadTissueTransplantBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadTissueTransplantBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>
+                        Have you ever injections of human pituiary growth hormone or pituitary gonadotrophin (fertility medicine) or seen a neurosurgeon
+                        or a neurologist?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadFertilityMedicineBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadFertilityMedicineBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>
+                        From 1980 to 1996, did you spend time that adds up to 12 months in the United Kingdom (England, Whales, Scotland, Ireland,
+                        The Channel Islands or Isle of Man)?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="timeInUK12months" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="timeInUK12months" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="3">
+                        <br/>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="3" style="color: blue">
+                        Female Donors only:
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Are you breast-feeding?
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="breastFeeding" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio custom-radio">
+                          <input type="radio" name="breastFeeding" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>
+                        Are you pregnant or have you been pregnant in the last 6 months?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="pregnant" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="pregnant" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+
+
+                  </tbody>
+                </table>
+              </div>
+
+
+              <div class="column">
+                <table class="ui compact table">
+                  <thead class="full-width">
+                    <tr>
+                      <th>Question</th>
+                      <th>Yes</th>
+                      <th>No</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <td colspan="3" style="color: blue">
+                        Do you have or have you ever had:
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Rheumatic fever, chest pains, heart disease/surgery or a stroke?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadHeartDiseaseBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadHeartDiseaseBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Lung disease, asthma, tuberculosis (TB), or coughed up blood?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadLungDiseaseBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadLungDiseaseBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+
+                    <tr>
+                      <td>
+                        Cancer, a blood disease, an abnormal bleeding disorder, a bleeding gastric, duodenal ulcer?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadBloodDiseaseBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadBloodDiseaseBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Diabetes, thyroid disease, kidney disease, epilepsy?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadThyroidDiseaseBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadThyroidDiseaseBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Severe allergy or skin rashes?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadSkinDiseaseBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadSkinDiseaseBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Chagas disease, babesiosis, HTLV-1 or any other chronic infectious disease?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadChagasDiseaseBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadChagasDiseaseBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Any other chronic medical condition? E.g hypertension
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadChronicMedicalConditionBefore" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadChronicMedicalConditionBefore" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Have you or your close relative(s) had an unexplained neurological condition or been diagnosed with Creutzfeldt-Jakob disease
+                        (Mad Cow disease)?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadRelativeWithCJD" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="hadRelativeWithCJD" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="3" style="color: blue">
+                        Have you or your sexual partner:
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        In the past 12 months suffered from night sweats, unintentional weight loss, persistent fever, diarrhoea or swollen glands?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="sufferedFromDiarrhoeaPast12Months" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="sufferedFromDiarrhoeaPast12Months" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        In the past 6 months received a blood transfusion or treatment with human or animal blood products or clotting factors?
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="receivedBloodTransInLast6Months" value="Yes">
+                        </div>
+                      </td>
+                      <td>
+                        <div class="ui radio">
+                          <input type="radio" name="receivedBloodTransInLast6Months" value="No">
+                        </div>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
