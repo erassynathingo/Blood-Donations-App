@@ -121,7 +121,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
       dateOfBirth: ["", [Validators.required]],
       gender: ["", [Validators.required]],
       language: ["", [Validators.required]],
-      country: ["", [Validators.required]],
+      town: ["", [Validators.required]],
       populationGroup: ["", [Validators.required]],
       postalAddress: ["", [Validators.required]],
       homeAddress: ["", [Validators.required]],
