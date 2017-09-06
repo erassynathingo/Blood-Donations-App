@@ -2,15 +2,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 //import { bootstrap } from '@angular/platform-browser-dynamic';
-// Import angular2-fusioncharts
-
-
-
-
-// Load FusionCharts Charts module
-let Charts = require('fusioncharts/fusioncharts.charts');
-
-
 
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -24,11 +15,9 @@ import { requestOptionsProvider } from "./services/default-request-options.servi
 import { Pnotify } from "./services/pnotify.service";
 import { UserManagerComponent } from "./user-manager/user-manager.component";
 import { CampsComponent } from "./camps/camps.component";
-import { HttpModule, BrowserXhr } from '@angular/http';
-import { CORSService } from './services/cors.service';
-import * as FusionCharts from 'fusioncharts';  // Import FusionCharts library
-import { FusionChartsModule } from 'angular2-fusioncharts';  // Create FusionCharts provider function
-//import { FusionChartsComponent } from 'angular2-fusioncharts';
+import { HttpModule, BrowserXhr } from "@angular/http";
+import { CORSService } from "./services/cors.service";
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -39,28 +28,22 @@ import { FusionChartsModule } from 'angular2-fusioncharts';  // Create FusionCha
     UserManagerComponent,
     CampsComponent,
     LoginComponent
-    //FusionCharts
-    
   ],
-  imports: [BrowserModule, AppRoutingModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    FusionChartsModule.forRoot(FusionChartsProvider)],
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB4BuwyFTlS1cU1EODuewOZiVH8Fto38rs'
+    })
+  ],
   providers: [APIFunctionsService, Logger, requestOptionsProvider, Pnotify],
   bootstrap: [AppComponent]
 })
-@NgModule({
-//FusionChartsComponent
-})
-export class AppModule { }
-export function FusionChartsProvider() {
-  // Resolve charts dependency
-  Charts(FusionCharts);
-
-  return FusionCharts;
-}
-
+@NgModule({})
+export class AppModule {}
 /*bootstrap(AppComponent, [
  HttpModule,
  provide(BrowserXhr,{useClass:CORSService})

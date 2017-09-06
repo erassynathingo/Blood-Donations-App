@@ -1,6 +1,18 @@
 <div class="camps">
   <div class="ui segment">
     <br/>
-    <h1>Camps</h1>
+    <h1>{{ title }}</h1>
+
+    <div class="ui segment">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+        <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.icon" (markerClick)="clickedMarker(m.label)" [markerDraggable]="m.draggable">
+            <agm-info-window>
+                <strong>{{m.label}}</strong>
+              </agm-info-window>
+        </agm-marker>
+        <agm-circle [clickable]="true" [fillColor]="red" [fillOpacity]="0.3" [latitude]="lat" [longitude]="lng" [radius]="50000"></agm-circle>
+
+      </agm-map>
+    </div>
   </div>
 </div>

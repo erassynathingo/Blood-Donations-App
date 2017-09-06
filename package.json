@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.1",
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
@@ -21,7 +22,6 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
-    "angular2-fusioncharts": "^1.0.2-rc.5",
     "core-js": "^2.4.1",
     "echarts": "^3.6.2",
     "jquery": "^3.2.1",
