@@ -32,12 +32,79 @@
                 <option value="Admin"><i class="user green icon"></i>Admin</option>
               </select>
             </div>
-            <div class="ui fluid large red submit button" (click)='login(loginForm.value)' >Login</div>
+            <div class="ui fluid large red submit button" (click)='login(loginForm.value)'>Login</div>
             <div class="ui error message"></div>
+            <br/>
+            <div class="ui red horizontal divider">
+              Or
+            </div>
+            <div class="ui red">
+              <a (click)="registerForm()">Register <i class="signup icon"></i></a>
+            </div>
           </div>
 
         </form>
+
+        <div class="ui modal">
+          <div class="header">
+            Register
+          </div>
+          <div class="content">
+            <form class="ui form" [formGroup]="registrationForm" novalidate>
+              <div class="field">
+                <div class="fields">
+
+                  <div class="twelve ui wide field required">
+                    <label>First Name</label>
+                    <input type="text" formControlName="firstName" name="firstName" placeholder="First Name" required>
+                  </div>
+
+                  <div class="twelve ui wide field required">
+                    <label>Last Name</label>
+                    <input type="text" name="last Name" formControlName="lastName" placeholder="Last Name">
+                  </div>
+
+                  <div class="twelve ui wide field required">
+                    <label>Email</label>
+                    <input type="email" formControlName="email" name="email" placeholder="email" required>
+                  </div>
+
+                  <div class="twelve ui wide field required">
+                    <label>ID Number</label>
+                    <input type="text" formControlName="id_number" name="idNumber" placeholder="ID Number" required>
+                  </div>
+                </div>
+
+                <div class="fields">
+
+                  <div class="twelve ui wide field required">
+                    <label>User Name</label>
+                    <input type="text" formControlName="username" name="username" placeholder="User Name" required>
+                  </div>
+
+                  <div class="twelve ui wide field required">
+                    <label>Password</label>
+                    <input type="password"  name="password" placeholder="Password">
+                  </div>
+
+                  <div class="twelve ui wide field required">
+                    <label>Repeat Password</label>
+                    <input type="password" formControlName="password" name="password" placeholder="Repeat Password" required>
+                  </div>
+                </div>
+              </div>
+              <div class="actions">
+                <div class="ui green button" (click)="register(registrationForm.value)">Submit</div>
+                <div class="ui red button close" (click)="closeModal()">Cancel</div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
       </div>
+
+
 
 
     </div>

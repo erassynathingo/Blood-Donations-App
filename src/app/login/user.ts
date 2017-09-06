@@ -1,9 +1,10 @@
 export class User {
-    public _id: Date;
+    public id_number: number;
     public firstName: string;
     public username: string;
     public lastName: string;
     public password: string;
     public role: string;
+    public email: string;
     public permissions: string[];
 }
