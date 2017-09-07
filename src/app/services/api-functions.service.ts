@@ -44,6 +44,17 @@ export class APIFunctionsService {
     let path = this.baseUrl +''+ url;
     return this.http.put(path, body, this.options).map(this.extractData).catch(this.handleError);
   }
+
+  getOne(url: string): Observable<any>{
+    let path = this.baseUrl + '' + url;
+    return this.http.get(path, this.options).map(this.extractData).catch(this.handleError);
+  }
+
+  getMany(url: string): Observable<any>{
+    let path = this.baseUrl + '' + url;
+    return this.http.get(path, this.options).map(this.extractData).catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     console.log("res: ",res);
     let body = res.json();
