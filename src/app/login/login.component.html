@@ -1,113 +1,127 @@
-<div class="ui middle aligned center aligned grid login">
-  <div class="column">
-    <div class="ui card centered raised stackable">
-      <div class="ui tiny">
-        <div class="ui fluid centered Mini image">
-          <img src="../assets/nambts_logo.png" alt="nambts Logo">
-        </div>
+<div class="ui middle aligned blurring center aligned grid login content">
+  <div class="ui card centered raised stackable">
+    <div class="ui tiny">
+      <div class="ui fluid centered Mini image">
+        <img src="../assets/nambts_logo.png" alt="nambts Logo">
       </div>
-      <div class="content">
-        <div class="ui horizontal divider">
-          Login
-        </div>
-        <form [formGroup]="loginForm" novalidate class="ui center large form">
-          <div class="form-group">
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="user icon"></i>
-                <input type="text" formControlName="username" name="username" placeholder="Username">
-              </div>
+    </div>
+    <div class="content">
+      <div class="ui horizontal divider">
+        Login
+      </div>
+      <form [formGroup]="loginForm" novalidate class="ui center large form">
+        <div class="ui text loader">Loggin In, Please Wait</div>
+        <div class="form-group">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" formControlName="username" name="username" placeholder="Username">
             </div>
-            <div class="field">
-              <div class="ui left icon input">
-                <i class="lock icon"></i>
-                <input type="password" name="password" formControlName="password" placeholder="Password">
-              </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" formControlName="password" placeholder="Password">
             </div>
-            <div class="field">
-              <label>Role</label>
-              <select class="ui dropdown" formControlName="role" name="role">
+          </div>
+          <div class="field">
+            <label>Role</label>
+            <select class="ui dropdown" formControlName="role" name="role">
                 <option value="Doctor"><i class="doctor blue icon"></i>Doctor</option>
                 <option value="Donor"><i class="theme red icon"></i>Donor</option>
                 <option value="Admin"><i class="user green icon"></i>Admin</option>
               </select>
-            </div>
-            <div class="ui fluid large red submit button" (click)='login(loginForm.value)'>Login</div>
-            <div class="ui error message"></div>
-            <br/>
-            <div class="ui red horizontal divider">
-              Or
-            </div>
-            <div class="ui red">
-              <a (click)="registerForm()">Register <i class="signup icon"></i></a>
-            </div>
           </div>
-
-        </form>
-
-        <div class="ui modal">
-          <div class="header">
-            Register
+          <div class="ui fluid large red submit button" (click)='login(loginForm.value)'>Login</div>
+          <div class="ui error message"></div>
+          <br/>
+          <div class="ui red horizontal divider">
+            Or
           </div>
-          <div class="content">
-            <form class="ui form" [formGroup]="registrationForm" novalidate>
-              <div class="field">
-                <div class="fields">
+          <div class="ui red">
+            <a (click)="registerForm()">Register <i class="signup icon"></i></a>
+          </div>
+        </div>
 
-                  <div class="twelve ui wide field required">
-                    <label>First Name</label>
-                    <input type="text" formControlName="firstName" name="firstName" placeholder="First Name" required>
-                  </div>
+      </form>
 
-                  <div class="twelve ui wide field required">
-                    <label>Last Name</label>
-                    <input type="text" name="last Name" formControlName="lastName" placeholder="Last Name">
-                  </div>
+      <div class="ui modal">
+        <div class="header">
+          Register
+        </div>
+        <div class="content">
+          <form class="ui form" [formGroup]="registrationForm" novalidate>
+            <div class="field">
+              <div class="fields">
 
-                  <div class="twelve ui wide field required">
-                    <label>Email</label>
-                    <input type="email" formControlName="email" name="email" placeholder="email" required>
-                  </div>
-
-                  <div class="twelve ui wide field required">
-                    <label>ID Number</label>
-                    <input type="text" formControlName="id_number" name="idNumber" placeholder="ID Number" required>
-                  </div>
+                <div class="twelve ui wide field required">
+                  <label>First Name</label>
+                  <input type="text" formControlName="firstName" name="firstName" placeholder="First Name" required>
                 </div>
 
-                <div class="fields">
+                <div class="twelve ui wide field required">
+                  <label>Last Name</label>
+                  <input type="text" name="last Name" formControlName="lastName" placeholder="Last Name">
+                </div>
 
-                  <div class="twelve ui wide field required">
-                    <label>User Name</label>
-                    <input type="text" formControlName="username" name="username" placeholder="User Name" required>
-                  </div>
+                <div class="twelve ui wide field required">
+                  <label>Email</label>
+                  <input type="email" formControlName="email" name="email" placeholder="email" required>
+                </div>
 
-                  <div class="twelve ui wide field required">
-                    <label>Password</label>
-                    <input type="password"  name="password" placeholder="Password">
-                  </div>
-
-                  <div class="twelve ui wide field required">
-                    <label>Repeat Password</label>
-                    <input type="password" formControlName="password" name="password" placeholder="Repeat Password" required>
-                  </div>
+                <div class="twelve ui wide field required">
+                  <label>ID Number</label>
+                  <input type="text" formControlName="id_number" name="idNumber" placeholder="ID Number" required>
                 </div>
               </div>
-              <div class="actions">
-                <div class="ui green button" (click)="register(registrationForm.value)">Submit</div>
-                <div class="ui red button close" (click)="closeModal()">Cancel</div>
-              </div>
-            </form>
-          </div>
 
+              <div class="fields">
+
+                <div class="twelve ui wide field required">
+                  <label>User Name</label>
+                  <input type="text" formControlName="username" name="username" placeholder="User Name" required>
+                </div>
+
+                <div class="twelve ui wide field required">
+                  <label>Password</label>
+                  <input type="password" name="password" placeholder="Password">
+                </div>
+
+                <div class="twelve ui wide field required">
+                  <label>Repeat Password</label>
+                  <input type="password" formControlName="password" name="password" placeholder="Repeat Password" required>
+                </div>
+              </div>
+            </div>
+            <div class="actions">
+              <div class="ui green button" (click)="register(registrationForm.value)">Submit</div>
+              <div class="ui red button close" (click)="closeModal()">Cancel</div>
+            </div>
+          </form>
         </div>
 
       </div>
-
 
 
 
     </div>
 
+
+
+
+  </div>
+  <div class="ui page dimmer" style="height: 100000px !important">
+    <div class="content">
+      <div class="center">
+        <div class="ui inverted">
+          <h2>Authenticating</h2>
+          <i class="huge icons">
+              <i class="big spinner loading icon"></i>
+              <i class="user icon"></i>
+          </i>
+          <h4 class="ui red">Please Wait..</h4>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

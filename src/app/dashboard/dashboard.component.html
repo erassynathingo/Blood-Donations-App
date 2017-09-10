@@ -7,19 +7,19 @@
         <div class="doubling two column row">
           <div style="display: block" class="column">
             <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="bar" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+              [chartType]="bar"></canvas>
           </div>
           <div style="display: block" class="column">
-            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="line" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="lineChartOptions" [legend]="barChartLegend"
+              [chartType]="line"></canvas>
           </div>
           <div style="display: block" class="column">
-            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="pie" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="pieChartOptions" [legend]="barChartLegend"
+              [chartType]="pie"></canvas>
           </div>
           <div style="display: block" class="column">
-            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-              [chartType]="doughnut" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="doughnutChartOptions" [legend]="barChartLegend"
+              [chartType]="doughnut"></canvas>
           </div>
         </div>
       </div>

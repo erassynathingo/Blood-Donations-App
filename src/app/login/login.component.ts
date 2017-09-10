@@ -6,11 +6,11 @@ import { APIFunctionsService } from "../services/api-functions.service";
 import { User } from "./user";
 import { Pnotify } from "../services/pnotify.service";
 import { Observable } from "rxjs";
-import { Router } from '@angular/router';
-import {UserService} from '../services/user.service';
+import { Router } from "@angular/router";
+import { UserService } from "../services/user.service";
 
 @Component({
-  selector: "login-template",
+  selector: "app-root",
   styleUrls: ["./login.component.css"],
   templateUrl: "./login.component.html",
   providers: [UserService]
@@ -60,27 +60,37 @@ export class LoginComponent implements OnInit, AfterViewInit {
     $(".ui.modal").modal();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    $(".fixed.menu").transition("vertical flip");
+  }
 
   private login = (model: Object): void => {
     Logger.log(model);
+    $(".login").dimmer("show");
     this.apiFunctions.login("/auth", model).subscribe(
       user => {
-        this.userService.setUser(user);
-        console.log(this.userService.getUser);
-        this.router.navigateByUrl('/dashboard');
+        setTimeout(() => {
+          $(".login").dimmer("hide");
+          this.userService.setUser(user);
+          console.log(this.userService.getUser);
+          this.router.navigateByUrl("/dashboard");
+          $(".fixed.menu").transition("horizontal flip");
+        }, 3000);
       },
       error => {
-        this.errorMessage = <any>error;
-        Logger.error(this.errorMessage);
-        $('.ui.card').transition("shake");
-        this.pnotify.error("Error", 5, this.errorMessage);
+        setTimeout(() => {
+          this.errorMessage = <any>error;
+          Logger.error(this.errorMessage);
+          $(".login").dimmer("hide");
+          $(".ui.card").transition("shake");
+          this.pnotify.error("Error", 5, this.errorMessage);
+        }, 3000);
       }
     );
   };
 
   private register = (model: Object): void => {
-    console.log("Registering: ", model)
+    console.log("Registering: ", model);
     this.apiFunctions.register("/users", model).subscribe(
       data => {
         Logger.log(`User Creation Successfull ${data}`);
@@ -88,7 +98,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       },
       error => {
         this.errorMessage = <any>error;
-        console.log("Login ",this.errorMessage);
+        console.log("Login ", this.errorMessage);
         this.pnotify.error("Error", 5, this.errorMessage);
       }
     );
