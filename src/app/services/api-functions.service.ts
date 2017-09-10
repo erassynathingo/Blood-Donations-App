@@ -41,7 +41,7 @@ export class APIFunctionsService {
 
   logout(url: string): Observable<any>{
     let path = this.baseUrl + ''+ url;
-    return this.http.delete(url, this.options).map(this.extractData).catch(this.handleError);
+    return this.http.delete(path, this.options).map(this.extractData).catch(this.handleError);
   }
 
   register(url: string, param: Object): Observable<any>{

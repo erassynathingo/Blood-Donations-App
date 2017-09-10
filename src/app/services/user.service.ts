@@ -5,13 +5,14 @@ import { User } from "../login/user";
 @Injectable()
 export class UserService {
 
-  User: User;
+  User: User = null;
 
-  getUser():User{
-    return this.User;
+  getUser():Promise<User>{
+    return this.User == null ? Promise.reject("No User"): Promise.resolve(this.User)
   }
 
   setUser(user: any):void{
-    this.getUser = user;
+    this.User = user;
+    console.log("User Set: ", this.getUser);
   }
 }
