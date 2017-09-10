@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'user-manager', component: UserManagerComponent },
     { path: 'camps', component: CampsComponent },
+    { path: 'about', component: AboutComponent },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ]
 

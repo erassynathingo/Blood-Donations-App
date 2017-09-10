@@ -3,5 +3,206 @@
   <div class="ui segment">
     <br/>
     <h1 class="center">Blood Banks</h1>
+    <div>
+      <form novalidate class="ui center form">
+        <table class="ui compact celled definition table">
+          <thead class="full-width ui inverted table">
+            <tr class="ui">
+              <th>Blood Type</th>
+              <th>Current Value</th>
+              <th>Increase/ Decrease by</th>
+              <th>Action</th>
+              <th>Save</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr>
+              <td>O -</td>
+              <td>2</td>
+              <td>{{one}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue1()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue1()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button" (click)='updateCount("O-", (one))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>O +</td>
+              <td>0</td>
+              <td>{{two}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue2()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue2()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button" (click)='updateCount("O+", (two))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>A -</td>
+              <td>0</td>
+              <td>{{three}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue3()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue3()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button" (click)='updateCount("A-", (three))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>A +</td>
+              <td>0</td>
+              <td>{{four}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue4()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue4()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button" (click)='updateCount("A+", (four))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>B -</td>
+              <td>0</td>
+              <td>{{five}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue5()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue5()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button" (click)='updateCount("B-", (five))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>B +</td>
+              <td>0</td>
+              <td>{{six}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue6()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue6()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button" (click)='updateCount("B+", (six))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td>AB -</td>
+              <td>0</td>
+              <td>{{seven}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue7()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue7()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button" (click)='updateCount("AB-", (seven))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>AB +</td>
+              <td>0</td>
+              <td>{{eight}}</td>
+              <td>
+                <button class="ui icon button" (click)="subtractValue8()">
+                  <i class="minus icon red"></i>
+                </button>
+                <button class="ui icon button" (click)="addValue8()">
+                  <i class="plus icon green"></i>
+                </button>
+              </td>
+              <td>
+                <button class="ui icon button"  (click)='updateCount("AB+", (eight))'>
+                  <i class="save icon blue"></i>
+                </button>
+                <button class="ui icon button">
+                  <i class="undo icon red"></i>
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </form>
+    </div>
   </div>
 </div>

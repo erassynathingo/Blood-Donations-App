@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -18,6 +19,7 @@ import { CampsComponent } from "./camps/camps.component";
 import { HttpModule, BrowserXhr } from "@angular/http";
 import { CORSService } from "./services/cors.service";
 import { AgmCoreModule } from '@agm/core';
+import { ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { AgmCoreModule } from '@agm/core';
     BloodBankComponent,
     UserManagerComponent,
     CampsComponent,
-    LoginComponent
+    LoginComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB4BuwyFTlS1cU1EODuewOZiVH8Fto38rs'
     })

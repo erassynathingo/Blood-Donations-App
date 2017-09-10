@@ -1,3 +1,4 @@
+import { UserService } from "./../services/user.service";
 import { Declarations } from "@angular/language-service/src/types";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder, FormArray } from "@angular/forms";
@@ -7,28 +8,43 @@ import { DonationApplication } from "../models/application.model";
 import { Logger } from "../services/logger.service";
 import { Pnotify } from "../services/pnotify.service";
 import { Observable } from "rxjs";
+import { User } from "../login/user";
 
 @Component({
   selector: "donate-blood",
-  templateUrl: "donate-blood.component.html"
+  templateUrl: "donate-blood.component.html",
+  providers: [UserService]
 })
 export class DonateBloodComponent implements OnInit, AfterViewInit {
+  // use formbuilder to simplify syntax
+  constructor(
+    private _fb: FormBuilder,
+    private pnotify: Pnotify,
+    private userService: UserService
+  ) {
+    this.createForm();
+
+  }
+
   public donorForm: FormGroup; // form Model
   public submitted: boolean;
   public events: any[] = []; // use to display form change events
 
-  // use formbuilder to simplify syntax
-  constructor(private _fb: FormBuilder, private pnotify: Pnotify) {
-    this.createForm();
-  }
+  User: User;
 
-  ngAfterViewInit() {}
+
+
+  ngAfterViewInit() {
+    //this.User = this.userService.getUser;
+  }
 
   ngOnInit(): void {
     // Initiating Calendar Functions
     this.initSemanticFunctions();
     $(".menu .step").tab();
     this.validateForm();
+
+    console.log("DOnate: ",this.userService.getUser);
   }
 
   private createForm = (data?: any): void => {
@@ -100,7 +116,6 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
   };
 
   private changePage = (currentPage: string): void => {
-
     $(currentPage).transition("shake");
   };
 
@@ -212,7 +227,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     });
   }
 
-  riskInfo(){
+  riskInfo() {
     return this._fb.group({
       HIVorARVSwithPartner: ["", [Validators.required]],
       donateReasonForHIVTest: ["", [Validators.required]],
@@ -222,9 +237,9 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
         sexWithProstitute: ["", [Validators.required]]
       }),
       sufferedFromSTI12months: ["", [Validators.required]],
-      injectedWithDrugs:["", [Validators.required]],
+      injectedWithDrugs: ["", [Validators.required]],
       uncertainOfPartnerSexualPast: ["", [Validators.required]],
       bloodSafeForTransfusion: ["", [Validators.required]]
-    })
+    });
   }
 }

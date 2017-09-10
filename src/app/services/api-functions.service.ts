@@ -39,6 +39,11 @@ export class APIFunctionsService {
       .catch(this.handleError);
   }
 
+  logout(url: string): Observable<any>{
+    let path = this.baseUrl + ''+ url;
+    return this.http.delete(url, this.options).map(this.extractData).catch(this.handleError);
+  }
+
   register(url: string, param: Object): Observable<any>{
     let body = JSON.stringify(param);
     let path = this.baseUrl +''+ url;
@@ -55,18 +60,27 @@ export class APIFunctionsService {
     return this.http.get(path, this.options).map(this.extractData).catch(this.handleError);
   }
 
+  updateData(url: string, data: Object): Observable<any>{
+    let path = this.baseUrl + '' + url;
+    return this.http.patch(path,data, this.options).map(this.extractData).catch(this.handleError);
+
+  }
+
+  postData(url: string, data: Object): Observable<any>{
+    let body = JSON.stringify(data);
+    let path = this.baseUrl +''+ url;
+    return this.http.post(path, body, this.options).map(this.extractData).catch(this.handleError);
+  }
+
   private extractData(res: Response) {
-    console.log("res: ",res);
     let body = res.json();
     return body || {};
   }
 
   private handleError(error: any) {
-    console.log("ERR: ",error);
     let errMsg = error.message
       ? error.message
       : error.status ? {status: error.status, body: error._body} : error;
-    Logger.error(errMsg);
     return Observable.throw(errMsg);
   }
 }

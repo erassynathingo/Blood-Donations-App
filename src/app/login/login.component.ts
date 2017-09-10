@@ -6,11 +6,14 @@ import { APIFunctionsService } from "../services/api-functions.service";
 import { User } from "./user";
 import { Pnotify } from "../services/pnotify.service";
 import { Observable } from "rxjs";
+import { Router } from '@angular/router';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: "login-template",
   styleUrls: ["./login.component.css"],
-  templateUrl: "./login.component.html"
+  templateUrl: "./login.component.html",
+  providers: [UserService]
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   User: User;
@@ -24,7 +27,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(
     private _fb: FormBuilder,
     private pnotify: Pnotify,
-    private apiFunctions: APIFunctionsService
+    private apiFunctions: APIFunctionsService,
+    private router: Router,
+    private userService: UserService
   ) {
     this.createLoginForm();
     this.createRegisterForm();
@@ -56,13 +61,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {}
+
   private login = (model: Object): void => {
     Logger.log(model);
     this.apiFunctions.login("/auth", model).subscribe(
-      user => (this.User = user),
+      user => {
+        this.userService.setUser(user);
+        console.log(this.userService.getUser);
+        this.router.navigateByUrl('/dashboard');
+      },
       error => {
         this.errorMessage = <any>error;
         Logger.error(this.errorMessage);
+        $('.ui.card').transition("shake");
         this.pnotify.error("Error", 5, this.errorMessage);
       }
     );

@@ -1,10 +1,29 @@
 <div>
-    <div class="ui segment">
+  <div class="ui segment">
     <br/>
-    <h1 class="center">Dashboard</h1>
     <div class="ui segment">
-      <br/>
-     <div id="chart-container">Available Blood</div>
+      <h1 id="chart-container center Bold">Blood Counts</h1>
+      <div class="ui grid">
+        <div class="doubling two column row">
+          <div style="display: block" class="column">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+              [chartType]="bar" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+          <div style="display: block" class="column">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+              [chartType]="line" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+          <div style="display: block" class="column">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+              [chartType]="pie" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+          <div style="display: block" class="column">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+              [chartType]="doughnut" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
