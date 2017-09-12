@@ -37,10 +37,10 @@ export class DashboardComponent implements OnInit {
     },
     layout: {
       padding: {
-        left: 120,
-        right: 120,
-        top: 80,
-        bottom: 180
+        left: 60,
+        right: 60,
+        top: 0,
+        bottom: 0
       }
     },
     title: {
@@ -58,10 +58,10 @@ export class DashboardComponent implements OnInit {
     },
     layout: {
       padding: {
-        left: 120,
-        right: 120,
-        top: 80,
-        bottom: 180
+        left: 60,
+        right: 60,
+        top: 0,
+        bottom: 0
       }
     },
     label: "Doughnut Chart",
@@ -83,14 +83,13 @@ export class DashboardComponent implements OnInit {
         bottom: 0
       }
     },
-    label: "Pie Chart",
-    circumference: (1*Math.PI)
+    label: "Pie Chart"
   };
 
   public bar: string = "bar";
   public line: string = "line";
   public pie: string = "pie";
-  public doughnut: string = "radar";
+  public doughnut: string = "doughnut";
   public barChartLegend: boolean = true;
 
   blood_counts: Array<Object> = [];

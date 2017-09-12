@@ -1,8 +1,8 @@
+import { APIFunctionsService } from './../services/api-functions.service';
 import { UserService } from "./../services/user.service";
 import { Declarations } from "@angular/language-service/src/types";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder, FormArray } from "@angular/forms";
-import { APIFunctionsService } from "../services/api-functions.service";
 
 import { DonationApplication } from "../models/application.model";
 import { Logger } from "../services/logger.service";
@@ -20,7 +20,8 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
   constructor(
     private _fb: FormBuilder,
     private pnotify: Pnotify,
-    private userService: UserService
+    private userService: UserService,
+    private apiFunctions: APIFunctionsService
   ) {
     this.createForm();
 
@@ -42,9 +43,11 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     // Initiating Calendar Functions
     this.initSemanticFunctions();
     $(".menu .step").tab();
-    this.validateForm();
+    //this.validateForm();
 
-    console.log("DOnate: ",this.userService.getUser);
+    console.log("DOnate User: ",this.userService.getUser);
+
+    this.pnotify.success("Yes", 4000, "This mofoe Works");
   }
 
   private createForm = (data?: any): void => {
@@ -73,7 +76,11 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
 
   private submitForm = (model: DonationApplication, valid: boolean): void => {
     this.submitted = true;
-
+    this.apiFunctions.register(`/donate`, model).subscribe(data=>{
+      console.log(data);
+    }, error=>{
+      console.log(error);
+    })
     console.log("Donor Application: ", model);
   };
 
@@ -84,9 +91,6 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     });
   };
 
-  private notify = (): void => {
-    this.pnotify.error("Yes", 4, "This mofoe Works");
-  };
 
   private validateForm = (): void => {
     $(".ui.form").form({

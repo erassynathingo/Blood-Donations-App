@@ -5,7 +5,7 @@ import 'pnotify/dist/pnotify.confirm.js';
 @Injectable()
 export class Pnotify {
   constructor() {
-    PNotify.prototype.options.styling = 'bootstrap3';
+    PNotify.prototype.options.styling = 'bootstrap4';
     PNotify.prototype.options.styling = "fontawesome";
   }
   notify(settings: any) {

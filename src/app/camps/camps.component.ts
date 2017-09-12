@@ -32,7 +32,7 @@ export class CampsComponent implements OnInit {
 		  lat: -22.562615,
 		  lng: 17.084105,
 		  label: 'NamBTS United House Center',
-		  draggable: false
+		  draggable: true
 	  },
 	  {
 		  lat: -22.646743,

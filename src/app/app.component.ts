@@ -1,3 +1,4 @@
+import {Pnotify} from './services/pnotify.service';
 import { Router } from "@angular/router";
 import { UserService } from "./services/user.service";
 import { APIFunctionsService } from "./services/api-functions.service";
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
   constructor(
     private apiFunctions: APIFunctionsService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private pnotify: Pnotify
   ) {}
 
   currentUser: any;
@@ -24,9 +26,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
 
-    this.currentUser = this.userService.getUser();
+   // this.currentUser = this.userService.getUser();
 
-    this.setsetUser(this.currentUser);
+    //this.setsetUser(this.currentUser);
   }
 
   private logout = (data?: any): void => {
@@ -34,9 +36,11 @@ export class AppComponent implements OnInit {
       data => {
         console.log(data);
         this.router.navigateByUrl("/login");
+        this.pnotify.success("Successfully Logged Out", 4000, "Success");
       },
       error => {
         console.log(error);
+        this.pnotify.error(error, 2000, "Error");
       }
     );
   };

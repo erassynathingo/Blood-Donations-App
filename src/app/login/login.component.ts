@@ -16,7 +16,7 @@ import { UserService } from "../services/user.service";
   providers: [UserService]
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  User: User;
+  User: any;
   errorMessage: string;
 
   loginForm: FormGroup; // Login form Model
@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           $(".login").dimmer("hide");
           this.userService.setUser(user);
           console.log(this.userService.getUser);
+          this.User = this.userService.getUser;
           this.router.navigateByUrl("/dashboard");
           $(".fixed.menu").transition("horizontal flip");
         }, 3000);
@@ -80,10 +81,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
       error => {
         setTimeout(() => {
           this.errorMessage = <any>error;
-          Logger.error(this.errorMessage);
           $(".login").dimmer("hide");
           $(".ui.card").transition("shake");
-          this.pnotify.error("Error", 5, this.errorMessage);
+          let resp = JSON.parse(error.body);
+          this.pnotify.error(resp.message, 3000, "Login Error");
         }, 3000);
       }
     );
