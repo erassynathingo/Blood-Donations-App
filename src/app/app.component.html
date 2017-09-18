@@ -9,10 +9,9 @@
 
     <a class="item right">
         <i class="doctor icon big"></i>|&nbsp;
-        <a class="pointing ui dropdown dd">&#160; Erastus Nathingo
+        <a class="pointing ui dropdown dd">&#160; {{User.firstName}} {{User.lastName}}
           <div class="menu hidden">
-            <div class="item">Profile</div>
-            <div class="item">Settings</div>
+            <div class="item" routerLink="/user-manager">Profile</div>
             <div class="ui divider"></div>
             <div class="item" (click)="logout()">Logout</div>
           </div>

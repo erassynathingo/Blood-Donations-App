@@ -1,3 +1,4 @@
+import { AuthGuard } from './_guards/auth.guard';
 import { AboutComponent } from './about/about.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,14 +12,15 @@ import { CampsComponent } from './camps/camps.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'donate-blood', component: DonateBloodComponent },
     { path: 'blood-bank', component: BloodBankComponent },
     { path: 'login', component: LoginComponent },
     { path: 'user-manager', component: UserManagerComponent },
     { path: 'camps', component: CampsComponent },
     { path: 'about', component: AboutComponent },
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: '**', redirectTo: '/dashboard' }
 ]
 
 @NgModule({

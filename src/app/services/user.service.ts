@@ -5,13 +5,14 @@ import { User } from "../login/user";
 @Injectable()
 export class UserService {
 
-  User: User = null;
+  User: User;
 
   getUser(){
-    return this.User;
+    return Promise.resolve(this.User);
   }
 
-  setUser(user: any):void{
+  setUser(user: User):void{
     this.User = user;
+    localStorage.setItem('currentUser', JSON.stringify(this.User));
   }
 }

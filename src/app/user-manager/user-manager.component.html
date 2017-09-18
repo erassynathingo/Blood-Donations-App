@@ -16,65 +16,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="collapsing">
-              <i class="doctor blue icon"></i>
-            </td>
-            <td>Erastus Nathingo</td>
-            <td>Erassy</td>
-            <td>September 14, 2016</td>
-            <td><a href="mailto:contact@erassy.com">contact@erassy.com</a></td>
-            <td>Universal</td>
+          <tr *ngFor="let user of Users">
+            <td class="collapsing">{{user.role}}</td>
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.entry_date}}</td>
+            <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
+            <td>{{user.permissions[0]}}</td>
             <td>
-              <button class="ui icon button">
+              <button (click)='openModal(".ui.viewModal")' class="ui icon button">
                 <i class="eye icon green"></i>
               </button>
               <button class="ui icon button">
                 <i class="edit icon blue"></i>
               </button>
-              <button class="ui icon button">
-                <i class="trash icon red"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="collapsing">
-              <i class="theme red icon"></i>
-            </td>
-            <td>Jamie Harington</td>
-            <td>Jamie123</td>
-            <td>January 11, 2015</td>
-            <td> <a href="mailto:jamieharingonton@yahoo.com">jamieharingonton@yahoo.com</a></td>
-            <td>Read, Write, Update, Delete</td>
-            <td>
-              <button class="ui icon button">
-                <i class="eye icon green"></i>
-              </button>
-              <button class="ui icon button">
-                <i class="edit icon blue"></i>
-              </button>
-              <button class="ui icon button">
-                <i class="trash icon red"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="collapsing">
-              <i class="user green icon"></i>
-            </td>
-            <td>Jill Lewis</td>
-            <td>jLewis@me</td>
-            <td>May 11, 2017</td>
-            <td><a href="mailto:jilsewris22@yahoo.com">jilsewris22@yahoo.com</a></td>
-            <td>Read, Write, Update, Delete</td>
-            <td>
-              <button class="ui icon button">
-                <i class="eye icon green"></i>
-              </button>
-              <button class="ui icon button">
-                <i class="edit icon blue"></i>
-              </button>
-              <button class="ui icon button">
+              <button class="ui icon button" (click)='openModal(".ui.basic.modal.deleteUserModal")'>
                 <i class="trash icon red"></i>
               </button>
             </td>
@@ -93,4 +49,29 @@
       </table>
     </div>
   </div>
+
+  <div class="ui basic modal deleteUserModal">
+    <div class="header">Confirm User Delete</div>
+
+    <div class="content">
+      <p></p>
+    </div>
+    <div class="actions">
+      <div class="ui approve button">
+        <i class="huge icons">
+                  <i class="big thin circle icon"></i>
+        <i class="Checkmark green icon"></i>
+        </i>
+      </div>
+      <div class="ui cancel button">
+        <i class="huge icons">
+                  <i class="big thin circle icon"></i>
+        <i class="Remove red icon"></i>
+        </i>
+      </div>
+    </div>
+
+
+  </div>
+
 </div>

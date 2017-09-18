@@ -20,6 +20,7 @@ import { HttpModule, BrowserXhr } from "@angular/http";
 import { CORSService } from "./services/cors.service";
 import { AgmCoreModule } from '@agm/core';
 import { ChartsModule} from 'ng2-charts';
+import { AuthGuard } from './_guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { ChartsModule} from 'ng2-charts';
       apiKey: 'AIzaSyB4BuwyFTlS1cU1EODuewOZiVH8Fto38rs'
     })
   ],
-  providers: [APIFunctionsService, Logger, requestOptionsProvider, Pnotify],
+  providers: [APIFunctionsService, Logger, requestOptionsProvider, Pnotify, AuthGuard],
   bootstrap: [AppComponent]
 })
 @NgModule({})

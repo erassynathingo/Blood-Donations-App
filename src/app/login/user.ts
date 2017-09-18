@@ -1,10 +1,10 @@
-export class User {
-    public id_number: number;
-    public firstName: string;
-    public username: string;
-    public lastName: string;
-    public role: string;
-    public email: string;
-    public permissions: string[];
-    public entry_date : Date;
+export interface User {
+    id_number: number;
+    firstName: string;
+    username: string;
+    lastName: string;
+    role: string;
+    email: string;
+    permissions: string[];
+    entry_date : Date;
 }

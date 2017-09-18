@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
       }
     },
     label: "Doughnut Chart",
-    type: 'doughtnut'
+    type: "doughtnut"
   };
 
   public lineChartOptions: any = {
@@ -94,26 +94,40 @@ export class DashboardComponent implements OnInit {
 
   blood_counts: Array<Object> = [];
   data: Array<Object> = [];
-  labels: Array<String> = ["O-", "O+", "A+", "B+", "AB+", "AB-", "A-", "B-"];
+  labels: Array<String> = [];
 
-
-  public barChartLabels: Array<String> = ["O-", "O+", "A+", "B+", "AB+", "AB-", "A-", "B-"];
+  public barChartLabels: Array<String> = JSON.parse(localStorage.getItem("labels")) == null ? [
+    "O-",
+    "O+",
+    "A+",
+    "B+",
+    "AB+",
+    "AB-",
+    "A-",
+    "B-"
+  ]: JSON.parse(localStorage.getItem("labels"));
 
   public barChartData: any[] = [
-    {
+    /*{
       data: [50, 15, 120, 23, 73, 8, 45, 60],
       label: "Counts"
+    },*/
+
+    {
+      data:
+        JSON.parse(localStorage.getItem("data")) == null
+          ? [50, 15, 120, 23, 73, 8, 45, 60]
+          : JSON.parse(localStorage.getItem("data")),
+          label: "Counts"
     }
   ];
-
 
   constructor(private apiFunction: APIFunctionsService) {}
   ngOnInit(): void {
     this.getAllBloodCounts();
   }
 
-
-  private getAllBloodCounts = (data?: any): void => {
+  public getAllBloodCounts = (data?: any): void => {
     this.apiFunction.getMany("/blood_count").subscribe(data => {
       this.blood_counts = data;
       this.populateData(this.blood_counts);
@@ -126,7 +140,9 @@ export class DashboardComponent implements OnInit {
     Dataset.forEach(element => {
       this.labels.push(element.blood_type);
     });
-    console.log(this.labels);
+
+    localStorage.setItem("labels", JSON.stringify(this.labels));
+    console.log("Labels: ", this.labels);
     return this.labels;
   };
 
@@ -134,9 +150,8 @@ export class DashboardComponent implements OnInit {
     Dataset.forEach(element => {
       this.data.push(element.count);
     });
-    console.log(this.data);
+    localStorage.setItem("data", JSON.stringify(this.data));
+    console.log("Data: ", this.data);
     return this.data;
   };
-
-
 }

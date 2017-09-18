@@ -1,3 +1,5 @@
+import { DashboardComponent } from './../dashboard/dashboard.component';
+import { AppComponent } from './../app.component';
 import { Logger } from "./../services/logger.service";
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Credentials } from "./credentials";
@@ -6,18 +8,19 @@ import { APIFunctionsService } from "../services/api-functions.service";
 import { User } from "./user";
 import { Pnotify } from "../services/pnotify.service";
 import { Observable } from "rxjs";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from "../services/user.service";
 
 @Component({
   selector: "app-root",
   styleUrls: ["./login.component.css"],
   templateUrl: "./login.component.html",
-  providers: [UserService]
+  providers: [UserService, DashboardComponent]
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   User: any;
   errorMessage: string;
+  returnUrl: string;
 
   loginForm: FormGroup; // Login form Model
   registrationForm: FormGroup;
@@ -29,10 +32,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private pnotify: Pnotify,
     private apiFunctions: APIFunctionsService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute,
+    public appComponent: AppComponent,
+    public dashboard: DashboardComponent
   ) {
     this.createLoginForm();
     this.createRegisterForm();
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   private createLoginForm = (data?: any): void => {
@@ -64,17 +71,17 @@ export class LoginComponent implements OnInit, AfterViewInit {
     $(".fixed.menu").transition("vertical flip");
   }
 
-  private login = (model: Object): void => {
-    Logger.log(model);
+  public login = (model: Object): void => {
+    Logger.log(model);          /**@todo remove */
     $(".login").dimmer("show");
     this.apiFunctions.login("/auth", model).subscribe(
       user => {
         setTimeout(() => {
           $(".login").dimmer("hide");
           this.userService.setUser(user);
-          console.log(this.userService.getUser);
-          this.User = this.userService.getUser;
-          this.router.navigateByUrl("/dashboard");
+          this.appComponent.activateUser();
+          this.userService.getUser().then(user=>this.User = user);
+          this.router.navigate([this.returnUrl]);
           $(".fixed.menu").transition("horizontal flip");
         }, 3000);
       },
@@ -90,17 +97,24 @@ export class LoginComponent implements OnInit, AfterViewInit {
     );
   };
 
-  private register = (model: Object): void => {
-    console.log("Registering: ", model);
+  public prepareDash = (): void=>{
+    this.dashboard.getAllBloodCounts();
+  }
+
+  public register = (model: Object): void => {
+    console.log("Registering: ", model);          /**@todo remove */
     this.apiFunctions.register("/users", model).subscribe(
       data => {
-        Logger.log(`User Creation Successfull ${data}`);
-        console.log(data);
+        Logger.log(`User Creation Successfull ${data}`);          /**@todo remove */
+        console.log(data);          /**@todo remove */
+        this.pnotify.success("User Creation Successfull", 3000, "Success");
+        this.router.navigate(['/login']);
       },
       error => {
         this.errorMessage = <any>error;
-        console.log("Login ", this.errorMessage);
-        this.pnotify.error("Error", 5, this.errorMessage);
+        console.log("Login ", this.errorMessage);          /**@todo remove */
+        let resp = JSON.parse(error.body);
+        this.pnotify.error(resp.message, 3000, "Registration Error");
       }
     );
   };

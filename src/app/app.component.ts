@@ -1,4 +1,4 @@
-import {Pnotify} from './services/pnotify.service';
+import { Pnotify } from "./services/pnotify.service";
 import { Router } from "@angular/router";
 import { UserService } from "./services/user.service";
 import { APIFunctionsService } from "./services/api-functions.service";
@@ -21,14 +21,14 @@ export class AppComponent implements OnInit {
     private pnotify: Pnotify
   ) {}
 
-  currentUser: any;
+  User: any;
 
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
-
-   // this.currentUser = this.userService.getUser();
-
-    //this.setsetUser(this.currentUser);
+    this.User =
+      JSON.parse(localStorage.getItem("currentUser")) == null
+        ? { firstName: "", lastName: "" }
+        : JSON.parse(localStorage.getItem("currentUser"));
   }
 
   private logout = (data?: any): void => {
@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
       data => {
         console.log(data);
         this.router.navigateByUrl("/login");
+        localStorage.removeItem("currentUser");
         this.pnotify.success("Successfully Logged Out", 4000, "Success");
       },
       error => {
@@ -45,8 +46,14 @@ export class AppComponent implements OnInit {
     );
   };
 
-  public setsetUser = (User: any): void=>{
-    let user: any = User;
-    console.log("App Comp: ", user)
-  }
+  public activateUser = (): void => {
+    this.User =
+      JSON.parse(localStorage.getItem("currentUser")) == null
+        ? { firstName: "", lastName: "" }
+        : JSON.parse(localStorage.getItem("currentUser"));
+
+
+    console.log("User: ", this.User);
+
+  };
 }
