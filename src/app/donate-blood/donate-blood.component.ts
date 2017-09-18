@@ -44,10 +44,6 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     this.initSemanticFunctions();
     $(".menu .step").tab();
     //this.validateForm();
-
-    console.log("DOnate User: ",this.userService.getUser);
-
-    this.pnotify.success("Yes", 4000, "This mofoe Works");
   }
 
   private createForm = (data?: any): void => {

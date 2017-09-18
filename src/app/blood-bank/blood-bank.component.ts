@@ -14,6 +14,7 @@ import { User } from "../login/user";
 })
 export class BloodBankComponent implements OnInit {
   type: string;
+  blood_counts: any;
 
   public one: number = 0;
   public two: number = 0;
@@ -30,7 +31,9 @@ export class BloodBankComponent implements OnInit {
     public dashboard: DashboardComponent
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.populateCounts();
+  }
 
   public addValue1 = (): void => {
     this.one += 1;
@@ -92,16 +95,19 @@ export class BloodBankComponent implements OnInit {
       data => {
         console.log(data);
         this.dashboard.getAllBloodCounts();
+        this.populateCounts();
+        this.pnotify.success(`${countData.blood_type} Blood Type Updated `, 3000, "Bank Update Success");
       },
       error => {
         console.log(error);
+        let resp = JSON.parse(error.body);
+        this.pnotify.error(resp.message, 3000, "Bank Update Error");
       }
     );
   };
 
-  public getOneCount = (type: string): any => {
-    return this.apiFunctions
-      .getOne(`/blood_count/${type}`)
-      .subscribe(data => data.count);
-  };
+  public populateCounts = (): void=>{
+    this.blood_counts = JSON.parse(localStorage.getItem("data")) == null ? [0,0,0,0,0,0,0,0,]: JSON.parse(localStorage.getItem("data"));
+    console.log("COUNTS: ",this.blood_counts);
+  }
 }

@@ -53,5 +53,14 @@ export class UserManagerComponent implements OnInit {
   public openModal = (url: any): void => $(url).modal("show");
 
   public deleteUser = (id: any): void=>{
+    this.apiFunctions.deleteOne(`/users/${id}`).subscribe(data=>{
+      this.pnotify.success(`User Deleted`, 3000, "Success")
+    },
+    error => {
+      Logger.log(`${JSON.stringify(error)}`);
+      console.log(error);
+      let resp = JSON.parse(error.body);
+      this.pnotify.error(resp.message, 3000, "Delete Error");
+    })
   }
 }
