@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
 
   public logout = (data?: any): void => {
     this.apiFunctions.logout("/auth").subscribe(
-      data => {
-        console.log(data);
+      resp => {
+        console.log(resp);
         localStorage.removeItem("currentUser");
         this.router.navigate(['/login']);
         this.pnotify.success("Successfully Logged Out", 4000, "Success");

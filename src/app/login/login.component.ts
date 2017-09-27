@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       password: ["", [Validators.required]],
       role: ["", [Validators.required]]
     });
-  };
+  }
 
   public createRegisterForm = (data?: any): void => {
     this.registrationForm = this._fb.group({
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       email: ["", [Validators.required]],
       role: ["Donor", [Validators.required]]
     });
-  };
+  }
 
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           $(".login").dimmer("hide");
           this.userService.setUser(user);
           this.appComponent.activateUser();
-          this.userService.getUser().then(user=>this.User = user);
+          this.userService.getUser().then(data => this.User = data);
           this.router.navigate([this.returnUrl]);
           $(".fixed.menu").transition("horizontal flip");
         }, 3000);
@@ -90,12 +90,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.errorMessage = <any>error;
           $(".login").dimmer("hide");
           $(".ui.card").transition("shake");
-          let resp = JSON.parse(error.body);
+          const resp = JSON.parse(error.body);
           this.pnotify.error(resp.message, 3000, "Login Error");
         }, 3000);
       }
     );
-  };
+  }
 
   public prepareDash = (): void=>{
     this.dashboard.getAllBloodCounts();
