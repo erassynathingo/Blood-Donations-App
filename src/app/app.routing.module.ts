@@ -21,7 +21,7 @@ const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: '/dashboard' }
-]
+];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

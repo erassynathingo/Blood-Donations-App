@@ -1,6 +1,6 @@
 import { APIFunctionsService } from "../services/api-functions.service";
 import { Component, OnInit } from "@angular/core";
-import { ChartsModule } from "ng2-charts";
+import { ChartsModule } from 'ng2-charts';
 
 @Component({
   selector: "dashboard-template",

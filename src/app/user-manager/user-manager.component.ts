@@ -12,12 +12,16 @@ import { Observable } from "rxjs";
 export class UserManagerComponent implements OnInit {
   Users: Array<Object> = [];
   User: Object;
+  registrationForm: FormGroup;
 
   constructor(
     private _fb: FormBuilder,
     private pnotify: Pnotify,
     private apiFunctions: APIFunctionsService
-  ) {}
+
+  ) {
+    this.createRegisterForm();
+  }
 
   ngOnInit() {
     this.getAllUsers();
@@ -63,4 +67,19 @@ export class UserManagerComponent implements OnInit {
       this.pnotify.error(resp.message, 3000, "Delete Error");
     })
   }
+
+  public createRegisterForm = (data?: any): void => {
+    this.registrationForm = this._fb.group({
+      id_number: ["", [Validators.required]],
+      firstName: ["", [Validators.required]],
+      username: ["", [Validators.required]],
+      lastName: ["", [Validators.required]],
+      password: ["", [Validators.required]],
+      email: ["", [Validators.required]],
+      role: ["Donor", [Validators.required]]
+    });
+  };
+
+  public registerForm = (): void => $(".ui.addUser.modal").modal("show");
+
 }

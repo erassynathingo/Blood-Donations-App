@@ -31,12 +31,12 @@ export class AppComponent implements OnInit {
         : JSON.parse(localStorage.getItem("currentUser"));
   }
 
-  private logout = (data?: any): void => {
+  public logout = (data?: any): void => {
     this.apiFunctions.logout("/auth").subscribe(
       data => {
         console.log(data);
-        this.router.navigateByUrl("/login");
         localStorage.removeItem("currentUser");
+        this.router.navigate(['/login']);
         this.pnotify.success("Successfully Logged Out", 4000, "Success");
       },
       error => {

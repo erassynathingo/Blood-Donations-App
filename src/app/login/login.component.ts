@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  private createLoginForm = (data?: any): void => {
+  public createLoginForm = (data?: any): void => {
     this.loginForm = this._fb.group({
       username: ["", [Validators.required]],
       password: ["", [Validators.required]],
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
   };
 
-  private createRegisterForm = (data?: any): void => {
+  public createRegisterForm = (data?: any): void => {
     this.registrationForm = this._fb.group({
       id_number: ["", [Validators.required]],
       firstName: ["", [Validators.required]],
@@ -119,7 +119,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     );
   };
 
-  public registerForm = (): void => $(".ui.modal").modal("show");
+  public registerForm = (): void => $(".ui.registerModal.modal").modal("show");
 
   public closeModal = (): void => $(".ui.modal").modal("hide");
 }
