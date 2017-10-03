@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
         this.pnotify.error(error, 2000, "Error");
       }
     );
-  };
+  }
 
   public activateUser = (): void => {
     this.User =
@@ -55,5 +55,5 @@ export class AppComponent implements OnInit {
 
     console.log("User: ", this.User);
 
-  };
+  }
 }
