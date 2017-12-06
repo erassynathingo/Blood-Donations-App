@@ -108,11 +108,6 @@ export class DashboardComponent implements OnInit {
   ]: JSON.parse(localStorage.getItem("labels"));
 
   public barChartData: any[] = [
-    /*{
-      data: [50, 15, 120, 23, 73, 8, 45, 60],
-      label: "Counts"
-    },*/
-
     {
       data:
         JSON.parse(localStorage.getItem("data")) == null

@@ -9,7 +9,7 @@
       <div class="ui horizontal divider">
         Login
       </div>
-      <form [formGroup]="loginForm" novalidate class="ui center large form">
+      <form [formGroup]="loginForm" novalidate class="ui center large form" (keyup.enter)='login(loginForm.value)'>
         <div class="ui text loader">Loggin In, Please Wait</div>
         <div class="form-group">
           <div class="field">
@@ -32,14 +32,14 @@
                 <option value="Admin"><i class="user green icon"></i>Admin</option>
               </select>
           </div>
-          <div class="ui fluid large red submit button" (click)='login(loginForm.value)'>Login</div>
+          <div class="ui fluid large red submit button"  (click)='login(loginForm.value)'>Login</div>
           <div class="ui error message"></div>
           <br/>
           <div class="ui red horizontal divider">
             Or
           </div>
           <div class="ui red">
-            <a (click)="registerForm()">Register <i class="signup icon"></i></a>
+            <a routerLink="/donate-blood">Donate Blood <i class="signup icon"></i></a>
           </div>
         </div>
 

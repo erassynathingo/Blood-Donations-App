@@ -37,6 +37,8 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     //this.User = this.userService.getUser;
+
+    $(".fixed.menu").transition("show");
   }
 
   ngOnInit(): void {
