@@ -15,6 +15,7 @@ export class UserManagerComponent implements OnInit {
   Users: Array<Object> = [];
   User: Object;
   registrationForm: FormGroup;
+  resetForm: FormGroup;
 
   loggedInUser: Object;
   currentUser: Object = {
@@ -35,14 +36,16 @@ export class UserManagerComponent implements OnInit {
     private router: Router
 
   ) {
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')) == null
+      ? { firstName: '', lastName: '' }
+      : JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
     this.getAllUsers();
-    this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) == null
-      ? { firstName: '', lastName: '' }
-      : JSON.parse(localStorage.getItem('loggedInUser'));
-      this.createRegisterForm();
+      console.log("Logged in User: ", this.loggedInUser);
+    this.createRegisterForm();
+    this.createResetForm();
   }
 
   public getAllUsers = (data?: any): void => {
@@ -121,14 +124,21 @@ export class UserManagerComponent implements OnInit {
 
   }
 
+  public resetPasswordDimmer = (): void => {
+    console.log("Password Reset Modal")
+    $('.ui.page.resetPasswordModal').dimmer('show');
+  }
+
   public submitForm = (model: any): void => {
     model.permissions = $('#permissions').dropdown('get value');
-    console.log("FORM: ",model);
+    console.log("FORM: ", model);
     this.closeDimmer('.ui.page.addUserForm');
-    $('.ui.inverted.dimmer.page.userSubmit').dimmer('show', {duration: {
-      show : 1000,
-      hide : 500
-    }});
+    $('.ui.inverted.dimmer.page.userSubmit').dimmer('show', {
+      duration: {
+        show: 1000,
+        hide: 500
+      }
+    });
 
     this.apiFunctions.register(`/users`, model).subscribe(data => {
       console.log(data);
@@ -161,6 +171,12 @@ export class UserManagerComponent implements OnInit {
       password: ["", [Validators.required]],
       email: ["", [Validators.required]],
       role: ["Donor", [Validators.required]]
+    });
+  };
+
+  public createResetForm = (data?: any): void => {
+    this.resetForm = this._fb.group({
+      password: ["", [Validators.required]],
     });
   };
 

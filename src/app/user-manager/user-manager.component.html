@@ -29,6 +29,10 @@
               <button class="ui icon button" (click)='viewOne(user)' id={{user._id}}>
                 <i class="eye icon green"></i>
               </button>
+              <button class="ui icon button {{user._id}}" id={{user._id}} (click)='resetPasswordDimmer()'>
+                <i class="key icon blue resetPasswordButton"></i>
+              </button>
+
               <button class="ui icon button {{user._id}}" [disabled]="loggedInUser.id_number == user._id " (click)='deletePopUp(user._id)' id={{user._id}}>
                 <i class="trash icon red deleteApplication"></i>
               </button>
@@ -253,60 +257,65 @@
 
 
 
-<div class="ui page addUser modal">
-  <div class="header">
-    Add User
-  </div>
+
+<div class="ui dimmer page resetPasswordModal">
   <div class="content">
-    <form class="ui form" [formGroup]="registrationForm" novalidate>
-      <div class="field">
-        <div class="fields">
 
-          <div class="twelve ui wide field required">
-            <label>First Name</label>
-            <input type="text" formControlName="firstName" name="firstName" placeholder="First Name" required>
-          </div>
+    <div class="ui inverted">
 
-          <div class="twelve ui wide field required">
-            <label>Last Name</label>
-            <input type="text" name="last Name" formControlName="lastName" placeholder="Last Name">
-          </div>
+      <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+      <div class="ui container">
+        <div class="content">
+          <div class="ui segment">
+            <form action="" [formGroup]="resetForm" novalidate class="ui form">
 
-          <div class="twelve ui wide field required">
-            <label>Email</label>
-            <input type="email" formControlName="email" name="email" placeholder="email" required>
-          </div>
+              <div id="personalInformation" class="ui segment form-group">
+                <h5 class="ui dividing red header">Reset Password</h5>
 
-          <div class="twelve ui wide field required">
-            <label>ID Number</label>
-            <input type="text" formControlName="id_number" name="idNumber" placeholder="ID Number" required>
-          </div>
-        </div>
+                <!-- Line 3 -->
+                <div class="field">
+                  <div class="fields">
 
-        <div class="fields">
+                    <div class="twelve ui wide field required">
+                      <label>New Password</label>
+                      <input type="password"  name="password" placeholder="New Password" required>
+                    </div>
 
-          <div class="twelve ui wide field required">
-            <label>User Name</label>
-            <input type="text" formControlName="username" name="username" placeholder="User Name" required>
-          </div>
+                    <div class="twelve ui wide field required">
+                      <label>Repeat Password</label>
+                      <input type="password" formControlName="password" name="repeat_password" placeholder="Repeat Password" required>
+                    </div>
 
-          <div class="twelve ui wide field required">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Password">
-          </div>
+                  </div>
+                </div>
+                <br/>
+                <br/>
 
-          <div class="twelve ui wide field required">
-            <label>Repeat Password</label>
-            <input type="password" formControlName="password" name="password" placeholder="Repeat Password" required>
+                <div class="ui button animated red right large" tabindex="0">
+                  <div class="visible content">Submit</div>
+                  <div class="hidden content">
+                    <i class="right arrow icon"></i>
+                  </div>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <div class="ui animated circular button" (click)='closeDimmer(".ui.dimmer.page.resetPasswordModal")'>
+                  <div class="hidden content red">Close</div>
+                  <div class="visible content">
+                    <i class="remove icon red"></i>
+                  </div>
+                </div>
+              </div>
+            </form>
+
           </div>
         </div>
       </div>
-      <div class="actions">
-        <div class="ui green button" (click)="register(registrationForm.value)">Submit</div>
-        <div class="ui red button close" (click)="closeModal()">Cancel</div>
-      </div>
-    </form>
+    </div>
   </div>
-
 </div>
 
