@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Logger } from "./../services/logger.service";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
@@ -7,6 +8,7 @@ import { Observable } from "rxjs";
 
 @Component({
   selector: "user-manager",
+  styleUrls: ['./user-manager.component.css'],
   templateUrl: "user-manager.component.html"
 })
 export class UserManagerComponent implements OnInit {
@@ -14,17 +16,33 @@ export class UserManagerComponent implements OnInit {
   User: Object;
   registrationForm: FormGroup;
 
+  loggedInUser: Object;
+  currentUser: Object = {
+    _id: 0,
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    password: '',
+    permissions: []
+  };
+  focusedId: number;
+
   constructor(
     private _fb: FormBuilder,
     private pnotify: Pnotify,
-    private apiFunctions: APIFunctionsService
+    private apiFunctions: APIFunctionsService,
+    private router: Router
 
   ) {
-    this.createRegisterForm();
   }
 
   ngOnInit() {
     this.getAllUsers();
+    this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser')) == null
+      ? { firstName: '', lastName: '' }
+      : JSON.parse(localStorage.getItem('loggedInUser'));
+      this.createRegisterForm();
   }
 
   public getAllUsers = (data?: any): void => {
@@ -56,16 +74,82 @@ export class UserManagerComponent implements OnInit {
 
   public openModal = (url: any): void => $(url).modal("show");
 
-  public deleteUser = (id: any): void=>{
-    this.apiFunctions.deleteOne(`/users/${id}`).subscribe(data=>{
-      this.pnotify.success(`User Deleted`, 3000, "Success")
+  public deleteUser = (id: any): void => {
+    this.apiFunctions.deleteOne(`/users/${id}`).subscribe(data => {
+      console.log(data);
+      this.getAllUsers();
+      $(`.ui.icon.button.${id}`).popup('hide');
+      this.pnotify.success('', 3000, 'Delete Success');
     },
-    error => {
-      Logger.log(`${JSON.stringify(error)}`);
+      error => {
+        Logger.log(`${JSON.stringify(error)}`);
+        console.log(error);
+        const resp = JSON.parse(error.body);
+        this.pnotify.error(resp.message, 3000, 'Delete Error');
+      });
+  }
+
+  public deletePopUp = (data: number): void => {
+    console.log(data);
+    this.focusedId = data;
+    $(`.ui.icon.button.${data}`).popup({
+      transition: 'fade',
+      on: 'click',
+      popup: $('.ui.custom.popup'),
+      color: 'red'
+    }).popup('show');
+  }
+
+  public hidePopUp = (data?: any): void => {
+    console.log(this.focusedId);
+    $(`.ui.icon.button.${this.focusedId}`).popup('hide');
+  }
+
+  public viewOne = (data?: any): void => {
+    console.log(`User Passed: `, data);
+    this.currentUser = data;
+    $('.ui.page.viewer').dimmer('show');
+  }
+
+  public closeDimmer = (element: string): void => {
+    $(element).dimmer('hide');
+  }
+
+  public addUser = (): void => {
+    $('.ui.page.addUserForm').dimmer('show');
+    $('.ui .dropdown').dropdown();
+
+  }
+
+  public submitForm = (model: any): void => {
+    model.permissions = $('#permissions').dropdown('get value');
+    console.log("FORM: ",model);
+    this.closeDimmer('.ui.page.addUserForm');
+    $('.ui.inverted.dimmer.page.userSubmit').dimmer('show', {duration: {
+      show : 1000,
+      hide : 500
+    }});
+
+    this.apiFunctions.register(`/users`, model).subscribe(data => {
+      console.log(data);
+      setTimeout(() => {
+        this.closeDimmer('.ui.inverted.dimmer.page.userSubmit');
+        this.pnotify.success('User Successfully Added', 2000, 'Success');
+        this.closeDimmer('.ui.inverted.dimmer.page.userSubmit');
+        this.getAllUsers();
+        this.router.navigate(['/user-manager']);
+      }, 1000);
+      this.closeDimmer('.ui.inverted.dimmer.page.userSubmit');
+    }, error => {
       console.log(error);
-      let resp = JSON.parse(error.body);
-      this.pnotify.error(resp.message, 3000, "Delete Error");
-    })
+      setTimeout(() => {
+        const resp = JSON.parse(error.body);
+        this.pnotify.error(resp.message, 3000, 'User Creation Error');
+        this.router.navigate(['/user-manager']);
+        this.closeDimmer('.ui.page.addUserForm');
+        this.closeDimmer('.ui.inverted.dimmer.page.userSubmit');
+      }, 500);
+    });
   }
 
   public createRegisterForm = (data?: any): void => {
@@ -79,7 +163,5 @@ export class UserManagerComponent implements OnInit {
       role: ["Donor", [Validators.required]]
     });
   };
-
-  public registerForm = (): void => $(".ui.addUser.modal").modal("show");
 
 }

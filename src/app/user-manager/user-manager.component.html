@@ -26,15 +26,16 @@
             <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
             <td>{{user.permissions[0]}}</td>
             <td>
-              <button (click)='openModal(".ui.viewModal")' class="ui icon button">
+              <button class="ui icon button" (click)='viewOne(user)' id={{user._id}}>
                 <i class="eye icon green"></i>
               </button>
-              <button class="ui icon button">
-                <i class="edit icon blue"></i>
+              <button class="ui icon button {{user._id}}" [disabled]="loggedInUser.id_number == user._id " (click)='deletePopUp(user._id)' id={{user._id}}>
+                <i class="trash icon red deleteApplication"></i>
               </button>
-              <button class="ui icon button" (click)='openModal(".ui.basic.modal.deleteUserModal")'>
-                <i class="trash icon red"></i>
-              </button>
+
+              <button class="ui icon button" [hidden]="loggedInUser.id_number != user._id" id={{user._id}}>
+                  <i class="user circle outline icon blue"></i>
+                </button>
             </td>
           </tr>
         </tbody>
@@ -42,39 +43,215 @@
           <tr>
             <th></th>
             <th colspan="7">
+              <div class="ui right floated small primary labeled icon button" (click)="addUser()">
+                <i class="user icon"></i> Add User
+              </div>
+            </th>
+            <!--
+            <th colspan="7">
               <div (click)="registerForm()" class="ui right floated small primary labeled icon button">
                 <i class="add user icon"></i> Add User
               </div>
             </th>
+          -->
           </tr>
         </tfoot>
       </table>
     </div>
   </div>
-
-  <div class="ui basic modal deleteUserModal">
-    <div class="header">Confirm User Delete</div>
-
+<!-- ===== VIEW USER MODAL ___ -->
+  <div class="ui dimmer page viewer">
     <div class="content">
-      <p></p>
-    </div>
-    <div class="actions">
-      <div class="ui approve button" (click)='deleteUser("1")'>
-        <i class="huge icons">
-          <i class="red trash icon"></i>
-        </i>
-      </div>
-      <div class="ui cancel button">
-        <i class="huge icons">
-          <i class="black remove circle icon"></i>
-        </i>
-      </div>
-    </div>
+
+      <div class="ui">
+
+        <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+        <div class="ui container">
+          <div class="content">
+            <div class="ui segment">
+              <div class="ui grid">
+                <div class="four wide column">
+
+                  <h4 class="header black">ID Number: &nbsp;&nbsp;
+                    <span class="ui blue">{{ currentUser._id || 0}}</span>
+                  </h4>
+                </div>
+                <div class="four wide column">
+
+                  <h4 class="header black">Email &nbsp;&nbsp;
+                    <span class="ui blue">{{ currentUser.email || n/a}}</span>
+                  </h4>
+                </div>
+                <div class="four wide column">
+                  <h4 class="header black">Username: &nbsp;&nbsp;
+                    <span class="ui blue">{{ currentUser.username || n/a}}</span>
+                  </h4>
+                </div>
 
 
-  </div>
+                <div class="four wide column">
+                  <h4 class="header black">Permissions: &nbsp;&nbsp;
+                    <span class="ui blue">{{ currentUser.permissions || n/a}}</span>
+                  </h4>
+                </div>
+
+                <div class="six wide column">
+                  <h4 class="header black">Entry Date: &nbsp;&nbsp;
+                    <span class="ui blue">{{ currentUser.entry_date || n/a}}</span>
+                  </h4>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <div class="ui animated circular button" (click)='closeDimmer(".ui.page.viewer")'>
+          <div class="hidden content red">Close</div>
+          <div class="visible content">
+            <i class="remove icon red"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===== VIEW USER MODAL ___ -->
+
+
+
+    <!-- ===== Confirm User Eletion popupL ___ -->
+
+    <div class="ui custom popup">
+      <h2>Delete User?</h2>
+      <div class="ui segment">
+        <div class="ui animated circular button" (click)='deleteUser(focusedId)'>
+          <div class="hidden content green">Yes</div>
+          <div class="visible content">
+            <i class="trash icon green"></i>
+          </div>
+        </div>
+        <div class="ui animated circular button" (click)='hidePopUp()'>
+          <div class="hidden content red">Cancel</div>
+          <div class="visible content">
+            <i class="remove icon red"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ===== Confirm User Eletion popupL ___ -->
+
+
 
 </div>
+
+    <!-- ===== Add User Form ___ -->
+
+<div class="ui dimmer page addUserForm">
+  <div class="content">
+
+    <div class="ui inverted">
+
+      <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+      <div class="ui container">
+        <div class="content">
+          <div class="ui segment">
+            <form action="" [formGroup]="registrationForm" novalidate class="ui form">
+
+              <div id="personalInformation" class="ui segment form-group">
+                <h5 class="ui dividing red header">Personal Information</h5>
+                <div class="field">
+                  <div class="fields">
+                    <div class="twelve ui wide field required">
+                      <label>First Name</label>
+                      <input type="text" name="firstName" formControlName="firstName" placeholder="First Name" required>
+                    </div>
+
+                    <div class="twelve ui wide field required">
+                      <label>Last Name</label>
+                      <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name" required>
+                    </div>
+
+                    <div class="twelve ui wide field required">
+                      <label>ID Number</label>
+                      <input type="tel" name="id_number" max="11" min="11" formControlName="id_number" placeholder="ID Number" required>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+
+                <!-- Line 3 -->
+                <div class="field">
+                  <div class="fields">
+                      <div class="six ui wide field required">
+                          <label>Username</label>
+                          <input type="text" name="username" formControlName="username" placeholder="username" required>
+                        </div>
+                      <div class="six ui wide field required">
+                          <label>Email</label>
+                          <input type="email" name="email" formControlName="email" placeholder="Email" required>
+                        </div>
+
+                        <div class="seven ui wide field required">
+                          <label>Permissions</label>
+                          <select class="ui dropdown fluid multiple search" id='permissions'>
+                            <option value=""></option>
+                            <option value="Read">Read</option>
+                            <option value="Delete">Delete</option>
+                            <option value="Update">Update</option>
+                            <option value="Create">Create</option>
+                            <option value="Patch">Patch</option>
+                          </select>
+                        </div>
+
+                    <div class="four ui wide field required">
+                      <label>Password</label>
+                      <input type="password" name="password" formControlName="password" placeholder="Password" required>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+                <br/>
+
+                <div class="ui button animated red right large" tabindex="0" (click)='submitForm(registrationForm.value)'>
+                  <div class="visible content">Submit Application</div>
+                  <div class="hidden content">
+                    <i class="right arrow icon"></i>
+                  </div>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <div class="ui animated circular button" (click)='closeDimmer(".ui.dimmer.page.addUserForm")'>
+                  <div class="hidden content red">Close</div>
+                  <div class="visible content">
+                    <i class="remove icon red"></i>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui inverted dimmer page userSubmit">
+  <div class="ui text loader">Creating User</div>
+</div>
+
+    <!-- ===== Add User Form ___ -->
+
+
 
 <div class="ui page addUser modal">
   <div class="header">

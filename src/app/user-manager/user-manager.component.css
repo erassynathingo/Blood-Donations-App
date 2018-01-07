@@ -1,3 +1,21 @@
-.user-manager {
 
+  .white{
+    color: white;
+}
+.black{
+  color: black;
+}
+.blue{
+  color: blue;
+}
+
+.red{
+  color: red;
+}
+
+.green{
+  color: green;
+}
+.darkred{
+  background: darkred !important;
 }
