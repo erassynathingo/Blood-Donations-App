@@ -62,6 +62,7 @@ export class APIFunctionsService {
 
   updateData(url: string, data: Object): Observable<any>{
     let path = this.baseUrl + '' + url;
+    console.log("PATH: ", path)
     return this.http.patch(path,data, this.options).map(this.extractData).catch(this.handleError);
 
   }

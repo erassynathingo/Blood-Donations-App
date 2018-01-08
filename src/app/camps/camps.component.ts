@@ -22,37 +22,43 @@ export class CampsComponent implements OnInit {
   locationLabel: string = "";
 
   markers: marker[] = [
-	  {
-		  lat: -22.572806,
-		  lng: 17.083481,
-		  label: 'NamBTS Donation Center & Head Office',
+    {
+      lat: -22.572806,
+      lng: 17.083481,
+      label: 'NamBTS Donation Center & Head Office',
       draggable: false
-	  },
-	  {
-		  lat: -22.562615,
-		  lng: 17.084105,
-		  label: 'NamBTS United House Center',
-		  draggable: true
-	  },
-	  {
-		  lat: -22.646743,
-		  lng: 14.600491,
-		  label: 'Swakopmund Donation Center',
-		  draggable: false
-	  },
-	  {
-		  lat: -22.958853,
-		  lng: 14.509828,
-		  label: 'Walvis Bay Donation Center',
-		  draggable: false
-	  }
+    },
+    {
+      lat: -22.562615,
+      lng: 17.084105,
+      label: 'NamBTS United House Center',
+      draggable: true
+    },
+    {
+      lat: -22.646743,
+      lng: 14.600491,
+      label: 'Swakopmund Donation Center',
+      draggable: false
+    },
+    {
+      lat: -22.958853,
+      lng: 14.509828,
+      label: 'Walvis Bay Donation Center',
+      draggable: false
+    },
+    {
+      lat: -22.427592,
+      lng: 14.982251,
+      label: 'Bank WHK Welwitchia Insurance',
+      draggable: true
+    }
   ]
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   private clickedMarker = (label: string): void => {
     Logger.log(`Location Selected: ${label}`);

@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Logger } from "./../services/logger.service";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
@@ -33,7 +33,8 @@ export class UserManagerComponent implements OnInit {
     private _fb: FormBuilder,
     private pnotify: Pnotify,
     private apiFunctions: APIFunctionsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
 
   ) {
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')) == null
@@ -43,9 +44,43 @@ export class UserManagerComponent implements OnInit {
 
   ngOnInit() {
     this.getAllUsers();
-      console.log("Logged in User: ", this.loggedInUser);
+    console.log("Logged in User: ", this.loggedInUser);
     this.createRegisterForm();
     this.createResetForm();
+  }
+
+  public validateForm = (): Boolean => {
+    $('.resetPassword').form({
+      on: 'blur',
+      fields: {
+        password: {
+          identifier: 'password',
+          rules: [
+            {
+              type: 'length[' + 6 + ']',
+              prompt: 'Password must be at least 6 characters in length'
+            }
+          ]
+        },
+        passwordConfirm: {
+          identifier: 'passwordConfirm',
+          rules: [
+            {
+              type: 'match[password]',
+              prompt: 'Passwords must match'
+            }
+          ]
+        }
+      },
+      inline: true,
+      onSuccess: function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    });
+
+    return $('.resetPassword').form('is valid');
   }
 
   public getAllUsers = (data?: any): void => {
@@ -56,11 +91,30 @@ export class UserManagerComponent implements OnInit {
         console.log(`Users Array:`, this.Users);
       },
       error => {
-        let resp = JSON.parse(error.body);
+        const resp = JSON.parse(error.body);
         this.pnotify.error(resp.message, 3000, "Fetch Error");
       }
     );
   };
+
+  public changePassword = (id: number, password: string): void => {
+    this.validateForm();
+    if(this.validateForm() === true){
+    this.apiFunctions.updateData(`/users/${id}`, password).subscribe(data => {
+      console.log("Password Changed: ", data);
+      setTimeout(() => {
+        this.closeDimmer('.ui.page.inverted.changePasswordDimmer');
+        this.pnotify.success('Password has been reset', 3000, 'Success');
+      }, 1000);
+    },
+      error => {
+        Logger.log(`${JSON.stringify(error)}`);
+        console.log(error);
+        const resp = JSON.parse(error.body);
+        this.pnotify.error(resp.message, 3000, "Password Reset Error");
+      });
+    }
+  }
 
   public getOneUser = (idNumber: number): void => {
     Logger.log(`Getting ${idNumber}`);
@@ -69,7 +123,7 @@ export class UserManagerComponent implements OnInit {
       error => {
         Logger.log(`${JSON.stringify(error)}`);
         console.log(error);
-        let resp = JSON.parse(error.body);
+        const resp = JSON.parse(error.body);
         this.pnotify.error(resp.message, 3000, "Single Fetch Error");
       }
     );
@@ -115,6 +169,7 @@ export class UserManagerComponent implements OnInit {
   }
 
   public closeDimmer = (element: string): void => {
+    console.log("Cloding Dimmer: ", element);
     $(element).dimmer('hide');
   }
 
@@ -124,9 +179,11 @@ export class UserManagerComponent implements OnInit {
 
   }
 
-  public resetPasswordDimmer = (): void => {
+  public resetPasswordDimmer = (user: any): void => {
     console.log("Password Reset Modal")
     $('.ui.page.resetPasswordModal').dimmer('show');
+    this.currentUser = user;
+    console.log("Updating User: ", this.currentUser);
   }
 
   public submitForm = (model: any): void => {

@@ -105,7 +105,7 @@ export class DashboardComponent implements OnInit {
     "AB-",
     "A-",
     "B-"
-  ]: JSON.parse(localStorage.getItem("labels"));
+  ] : JSON.parse(localStorage.getItem("labels"));
 
   public barChartData: any[] = [
     {
@@ -113,11 +113,11 @@ export class DashboardComponent implements OnInit {
         JSON.parse(localStorage.getItem("data")) == null
           ? [50, 15, 120, 23, 73, 8, 45, 60]
           : JSON.parse(localStorage.getItem("data")),
-          label: "Counts"
+      label: "Counts"
     }
   ];
 
-  constructor(private apiFunction: APIFunctionsService) {}
+  constructor(private apiFunction: APIFunctionsService) { }
   ngOnInit(): void {
     this.getAllBloodCounts();
   }
