@@ -72,14 +72,14 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     $(".ui.checkbox").checkbox();
   };
 
-  private submitForm = (model: DonationApplication, valid: boolean): void => {
+  public submitForm = (model: DonationApplication, valid: boolean): void => {
     this.submitted = true;
+    console.log("Donor Application: ", model);
     this.apiFunctions.register(`/donate`, model).subscribe(data=>{
       console.log(data);
     }, error=>{
       console.log(error);
     })
-    console.log("Donor Application: ", model);
   };
 
   private observeForm = (data?: any): void => {

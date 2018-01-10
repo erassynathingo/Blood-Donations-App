@@ -45,8 +45,10 @@ export class APIFunctionsService {
   }
 
   register(url: string, param: Object): Observable<any>{
+    console.log("BODY 1: ", param);
     let body = JSON.stringify(param);
     let path = this.baseUrl +''+ url;
+    console.log("BODY 2: ", body);
     return this.http.put(path, body, this.options).map(this.extractData).catch(this.handleError);
   }
 

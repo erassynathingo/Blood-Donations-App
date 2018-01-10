@@ -1,3 +1,4 @@
+import { DonationsComponent } from './donations/donations.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AboutComponent } from './about/about.component';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'user-manager', component: UserManagerComponent, canActivate: [AuthGuard] },
     { path: 'camps', component: CampsComponent },
     { path: 'about', component: AboutComponent },
+    { path: 'donations', component: DonationsComponent },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: '/dashboard' }
 ];

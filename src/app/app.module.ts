@@ -1,3 +1,4 @@
+import { DonationsComponent } from './donations/donations.component';
 import { AboutComponent } from './about/about.component';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -31,6 +32,7 @@ import { AuthGuard } from './_guards/auth.guard';
     UserManagerComponent,
     CampsComponent,
     LoginComponent,
+    DonationsComponent,
     AboutComponent
   ],
   imports: [

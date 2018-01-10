@@ -1,0 +1,65 @@
+<div>
+  <div class="ui segment">
+    <br/>
+    <div class="ui segment">
+      <h1 id="chart-container center Bold">Donations</h1>
+      <div class="column">
+          <div class="ui icon input right floated">
+              <input type="text" placeholder="Search...">
+              <i class="circular search link icon"></i>
+            </div>
+      </div>
+      <br/>
+
+      <!--  Donations Table -->
+
+      <div>
+        <table class="ui compact celled definition table">
+          <thead class="full-width ui inverted table">
+            <tr class="ui">
+              <th>ID</th>
+              <th>Gender</th>
+              <th>Full Name</th>
+              <th>Date of Birth</th>
+              <th>Town</th>
+              <th>Occupation</th>
+              <th>Cell Number</th>
+              <th>Postal Address</th>
+              <th>Home Address</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let app of Donations">
+              <td>{{app.personalInfo.idNumber}}</td>
+              <td class="collapsing">
+                <button class="ui icon button" (click)='viewOne(user)' id={{app.personalInfo.idNumber}}>
+                  <i class="female icon pink" [hidden]='app.personalInfo.gender == "Male"'></i>
+                  <i class="male icon blue" [hidden]='app.personalInfo.gender == "Female"'></i>
+                </button>
+              </td>
+              <td>{{app.personalInfo.title}}. {{app.personalInfo.firstName}} {{app.personalInfo.lastName}}</td>
+              <td>{{app.personalInfo.dateOfBirth}}</td>
+              <td>{{app.personalInfo.town}}</td>
+              <td>{{app.personalInfo.occupation}}</td>
+              <td>{{app.personalInfo.cellNumber.code}} {{app.personalInfo.cellNumber.number}}</td>
+              <td>{{app.personalInfo.postalAddress}}</td>
+              <td>{{app.personalInfo.homeAddress}}</td>
+              <td>
+                <button class="ui icon button" id={{app.personalInfo.idNumber}}>
+                  <i class="eye icon red"></i>
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <!--  Donations Table ends -->
+    </div>
+  </div>
+
+</div>
+ˀ
