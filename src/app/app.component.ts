@@ -19,7 +19,11 @@ export class AppComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private pnotify: Pnotify
-  ) {}
+  ) {
+    console.log(JSON.parse(localStorage.getItem("currentUser")) == null);
+    this.hideElements();
+
+  }
 
   User: any;
 
@@ -27,7 +31,7 @@ export class AppComponent implements OnInit {
     $(".ui.dropdown").dropdown();
     this.User =
       JSON.parse(localStorage.getItem("currentUser")) == null
-        ? { firstName: "", lastName: "" }
+        ? { firstName: "Guest", lastName: "Donor" }
         : JSON.parse(localStorage.getItem("currentUser"));
   }
 
@@ -36,6 +40,8 @@ export class AppComponent implements OnInit {
       resp => {
         console.log(resp);
         localStorage.removeItem("currentUser");
+        this.User.firstName = "Guest";
+        this.User.lastName = "Donor";
         this.router.navigate(['/login']);
         this.pnotify.success("Successfully Logged Out", 4000, "Success");
       },
@@ -55,5 +61,17 @@ export class AppComponent implements OnInit {
 
     console.log("User: ", this.User);
 
+  }
+
+  public hideElements = (): void => {
+    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
+      $('.doctor, .admin').hide();
+    }else {
+      console.log("Role: ", localStorage.getItem('role'));
+      if (localStorage.getItem('role') !== 'Admin') {
+        console.log("Not Admin");
+        $('.admin').hide();
+      }
+    }
   }
 }

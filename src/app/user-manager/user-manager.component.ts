@@ -40,6 +40,9 @@ export class UserManagerComponent implements OnInit {
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')) == null
       ? { firstName: '', lastName: '' }
       : JSON.parse(localStorage.getItem('currentUser'));
+      if (localStorage.getItem('role') === 'Admin') {
+        $('.doctor, .admin').show();
+      }
   }
 
   ngOnInit() {
@@ -131,7 +134,9 @@ export class UserManagerComponent implements OnInit {
 
   public openModal = (url: any): void => $(url).modal("show");
 
+
   public deleteUser = (id: any): void => {
+    console.log("Deleting User: ", id);
     this.apiFunctions.deleteOne(`/users/${id}`).subscribe(data => {
       console.log(data);
       this.getAllUsers();

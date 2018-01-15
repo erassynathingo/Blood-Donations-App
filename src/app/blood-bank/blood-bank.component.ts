@@ -29,7 +29,9 @@ export class BloodBankComponent implements OnInit {
     private pnotify: Pnotify,
     private apiFunctions: APIFunctionsService,
     public dashboard: DashboardComponent
-  ) {}
+  ) {
+    $('.doctor, .admin').show();
+  }
 
   ngOnInit() {
     this.populateCounts();

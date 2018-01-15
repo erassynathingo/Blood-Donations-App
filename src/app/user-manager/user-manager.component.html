@@ -24,7 +24,9 @@
             <td>{{user.username}}</td>
             <td>{{user.entry_date}}</td>
             <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
-            <td>{{user.permissions[0]}}</td>
+            <td>
+              <span *ngFor='let per of user.permissions'> {{per}} </span>
+            </td>
             <td>
               <button class="ui icon button" (click)='viewOne(user)' id={{user._id}}>
                 <i class="eye icon green"></i>
@@ -137,6 +139,28 @@
             <i class="remove icon red"></i>
           </div>
         </div>
+
+        <div class="ui card">
+            <div class="image">
+              <img src="/images/avatar2/large/kristy.png">
+            </div>
+            <div class="content">
+              <a class="header">Kristy</a>
+              <div class="meta">
+                <span class="date">Joined in 2013</span>
+              </div>
+              <div class="description">
+                Kristy is an art director living in New York.
+              </div>
+            </div>
+            <div class="extra content">
+              <a>
+                <i class="user icon"></i>
+                22 Friends
+              </a>
+            </div>
+          </div>
+
       </div>
     </div>
     <!-- ===== VIEW USER MODAL ___ -->

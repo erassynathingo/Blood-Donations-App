@@ -3,14 +3,15 @@
     <br/>
     <div class="ui segment">
       <h1 id="chart-container center Bold">Donations</h1>
-      <div class="column">
-          <div class="ui icon input right floated">
-              <input type="text" placeholder="Search...">
-              <i class="circular search link icon"></i>
+      <div class="column"  style="float: right; padding-bottom: 1%;">
+          <div class="ui search searchDonations">
+              <div class="ui icon input">
+                <input class="prompt" type="text" placeholder="Search ...">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
             </div>
       </div>
-      <br/>
-
       <!--  Donations Table -->
 
       <div>
@@ -33,7 +34,7 @@
             <tr *ngFor="let app of Donations">
               <td>{{app.personalInfo.idNumber}}</td>
               <td class="collapsing">
-                <button class="ui icon button" (click)='viewOne(user)' id={{app.personalInfo.idNumber}}>
+                <button class="ui icon button" id={{app.personalInfo.idNumber}}>
                   <i class="female icon pink" [hidden]='app.personalInfo.gender == "Male"'></i>
                   <i class="male icon blue" [hidden]='app.personalInfo.gender == "Female"'></i>
                 </button>

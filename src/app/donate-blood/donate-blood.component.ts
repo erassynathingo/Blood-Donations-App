@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { APIFunctionsService } from './../services/api-functions.service';
 import { UserService } from "./../services/user.service";
 import { Declarations } from "@angular/language-service/src/types";
@@ -21,9 +22,11 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     private _fb: FormBuilder,
     private pnotify: Pnotify,
     private userService: UserService,
-    private apiFunctions: APIFunctionsService
+    private apiFunctions: APIFunctionsService,
+    private router: Router
   ) {
     this.createForm();
+    this.hideElements();
 
   }
 
@@ -72,15 +75,21 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     $(".ui.checkbox").checkbox();
   };
 
-  public submitForm = (model: DonationApplication, valid: boolean): void => {
+  public submitForm = (model: any, valid: boolean): void => {
     this.submitted = true;
+    model.personalInfo.language = $('#language').dropdown('get value');
+
     console.log("Donor Application: ", model);
     this.apiFunctions.register(`/donate`, model).subscribe(data=>{
+
+      this.router.navigate(['/user-manager']);
       console.log(data);
-    }, error=>{
+    }, error => {
       console.log(error);
-    })
-  };
+      const resp = JSON.parse(error.body);
+      this.pnotify.error(resp.message, 3000, 'Donation Error');
+    });
+  }
 
   private observeForm = (data?: any): void => {
     /** @todo Remove this function */
@@ -243,5 +252,12 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
       uncertainOfPartnerSexualPast: ["", [Validators.required]],
       bloodSafeForTransfusion: ["", [Validators.required]]
     });
+  }
+
+  public hideElements = (): void => {
+    console.log(JSON.parse(localStorage.getItem("currentUser")) == null);
+    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
+      $('.doctor, .admin').hide();
+    }
   }
 }

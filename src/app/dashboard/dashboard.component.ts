@@ -117,7 +117,9 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  constructor(private apiFunction: APIFunctionsService) { }
+  constructor(private apiFunction: APIFunctionsService) {
+    $('.doctor, .admin').show();
+  }
   ngOnInit(): void {
     this.getAllBloodCounts();
   }

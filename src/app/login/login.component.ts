@@ -71,33 +71,40 @@ export class LoginComponent implements OnInit, AfterViewInit {
     $(".fixed.menu").transition("vertical flip");
   }
 
-  public login = (model: Object): void => {
-    Logger.log(model);          /**@todo remove */
-    $(".login").dimmer("show");
-    this.apiFunctions.login("/auth", model).subscribe(
-      user => {
-        setTimeout(() => {
-          $(".login").dimmer("hide");
-          this.userService.setUser(user);
-          this.appComponent.activateUser();
-          this.userService.getUser().then(data => this.User = data);
-          this.router.navigate([this.returnUrl]);
-          $(".fixed.menu").transition("horizontal flip");
-        }, 3000);
-      },
-      error => {
-        setTimeout(() => {
-          this.errorMessage = <any>error;
-          $(".login").dimmer("hide");
-          $(".ui.card").transition("shake");
-          const resp = JSON.parse(error.body);
-          this.pnotify.error(resp.message, 3000, "Login Error");
-        }, 3000);
-      }
-    );
+  public login = (model: any): void => {
+    if (model.role !== "") {
+
+      Logger.log(model);          /**@todo remove */
+      $(".login").dimmer("show");
+      this.apiFunctions.login("/auth", model).subscribe(
+        user => {
+          setTimeout(() => {
+            $(".login").dimmer("hide");
+            this.userService.setUser(user);
+            this.appComponent.activateUser();
+            this.userService.getUser().then(data => this.User = data);
+            this.router.navigate([this.returnUrl]);
+            localStorage.setItem('role', model.role);
+            $(".fixed.menu").transition("horizontal flip");
+          }, 3000);
+        },
+        error => {
+          setTimeout(() => {
+            this.errorMessage = <any>error;
+            $(".login").dimmer("hide");
+            $(".ui.card").transition("shake");
+            const resp = JSON.parse(error.body);
+            this.pnotify.error(resp.message, 3000, "Login Error");
+          }, 3000);
+        }
+      );
+    } else {
+      this.pnotify.error("Please Select a Role", 3000, "Login Error");
+      $(".ui.card").transition("shake");
+    }
   }
 
-  public prepareDash = (): void=>{
+  public prepareDash = (): void => {
     this.dashboard.getAllBloodCounts();
   }
 
