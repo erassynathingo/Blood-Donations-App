@@ -40,9 +40,7 @@ export class UserManagerComponent implements OnInit {
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')) == null
       ? { firstName: '', lastName: '' }
       : JSON.parse(localStorage.getItem('currentUser'));
-      if (localStorage.getItem('role') === 'Admin') {
-        $('.doctor, .admin').show();
-      }
+     this.hideElements();
   }
 
   ngOnInit() {
@@ -241,5 +239,19 @@ export class UserManagerComponent implements OnInit {
       password: ["", [Validators.required]],
     });
   };
+
+  public hideElements = (): void => {
+    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
+      $('.doctor, .admin').hide();
+    }else {
+      console.log("Role: ", localStorage.getItem('role'));
+      if (localStorage.getItem('role') !== 'Admin') {
+        console.log("Not Admin");
+        $('.admin').hide();
+      }else {
+        console.log("Doctor");
+      }
+    }
+  }
 
 }

@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
   ];
 
   constructor(private apiFunction: APIFunctionsService) {
-    $('.doctor, .admin').show();
+    this.hideElements();
   }
   ngOnInit(): void {
     this.getAllBloodCounts();
@@ -151,4 +151,18 @@ export class DashboardComponent implements OnInit {
     console.log("Data: ", this.data);
     return this.data;
   };
+
+  public hideElements = (): void => {
+    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
+      $('.doctor, .admin').hide();
+    }else {
+      console.log("Role: ", localStorage.getItem('role'));
+      if (localStorage.getItem('role') !== 'Admin') {
+        console.log("Not Admin");
+        $('.admin').hide();
+      }else {
+        console.log("Doctor");
+      }
+    }
+  }
 }

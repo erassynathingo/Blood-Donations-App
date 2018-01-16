@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
       resp => {
         console.log(resp);
         localStorage.removeItem("currentUser");
+        localStorage.removeItem("role");
         this.User.firstName = "Guest";
         this.User.lastName = "Donor";
         this.router.navigate(['/login']);
@@ -70,7 +71,9 @@ export class AppComponent implements OnInit {
       console.log("Role: ", localStorage.getItem('role'));
       if (localStorage.getItem('role') !== 'Admin') {
         console.log("Not Admin");
-        $('.admin').hide();
+        $('.administrator').hide();
+      }else {
+        console.log("Doctor");
       }
     }
   }
