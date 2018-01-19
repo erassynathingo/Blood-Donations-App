@@ -4,10 +4,10 @@ import { Logger } from "./../services/logger.service";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { APIFunctionsService } from "../services/api-functions.service";
 import { Pnotify } from "../services/pnotify.service";
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: "user-manager",
+  selector: 'user-manager',
   styleUrls: ['./user-manager.component.css'],
   templateUrl: "user-manager.component.html"
 })

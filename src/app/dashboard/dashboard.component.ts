@@ -153,16 +153,11 @@ export class DashboardComponent implements OnInit {
   };
 
   public hideElements = (): void => {
-    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
-      $('.doctor, .admin').hide();
-    }else {
-      console.log("Role: ", localStorage.getItem('role'));
-      if (localStorage.getItem('role') !== 'Admin') {
-        console.log("Not Admin");
-        $('.admin').hide();
-      }else {
-        console.log("Doctor");
-      }
+    if (localStorage.getItem('role') !== 'Admin') {
+      console.log("Not Admin");
+      $('.admin').hide();
+    } else {
+      console.log("Doctor");
     }
   }
 }

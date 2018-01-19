@@ -33,6 +33,8 @@ export class AppComponent implements OnInit {
       JSON.parse(localStorage.getItem("currentUser")) == null
         ? { firstName: "Guest", lastName: "Donor" }
         : JSON.parse(localStorage.getItem("currentUser"));
+
+        localStorage.setItem('role', 'Admin');
   }
 
   public logout = (data?: any): void => {

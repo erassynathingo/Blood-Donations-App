@@ -65,6 +65,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
     $(".ui.modal").modal();
+
+    localStorage.setItem('role', 'Admin');
   }
 
   ngAfterViewInit(): void {
@@ -78,6 +80,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       $(".login").dimmer("show");
       this.apiFunctions.login("/auth", model).subscribe(
         user => {
+
           setTimeout(() => {
             $(".login").dimmer("hide");
             this.userService.setUser(user);
@@ -86,6 +89,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             this.router.navigate([this.returnUrl]);
             localStorage.setItem('role', model.role);
             $(".fixed.menu").transition("horizontal flip");
+            this.hideElements();
           }, 3000);
         },
         error => {
@@ -129,4 +133,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public registerForm = (): void => $(".ui.registerModal.modal").modal("show");
 
   public closeModal = (): void => $(".ui.modal").modal("hide");
+
+  public hideElements = (): void => {
+    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
+      $('.doctor, .admin').hide();
+    }else {
+      console.log("Role: ", localStorage.getItem('role'));
+      if (localStorage.getItem('role') !== 'Admin') {
+        console.log("Not Admin");
+        $('.admin').hide();
+      }else {
+        console.log("Doctor");
+      }
+    }
+  }
 }
