@@ -95,6 +95,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     /** @todo Remove this function */
     this.donorForm.valueChanges.subscribe(value => {
       Logger.info(value);
+      this.validateForm();
     });
   };
 

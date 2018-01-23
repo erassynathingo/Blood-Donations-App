@@ -50,6 +50,13 @@ export class UserManagerComponent implements OnInit {
     this.createResetForm();
   }
 
+  public observeForm = (data?: any): void => {
+    /** @todo Remove this function */
+    this.resetForm.valueChanges.subscribe(value => {
+      this.validateForm();
+    });
+  };
+
   public validateForm = (): Boolean => {
     $('.resetPassword').form({
       on: 'blur',
@@ -62,7 +69,7 @@ export class UserManagerComponent implements OnInit {
               prompt: 'Password must be at least 6 characters in length'
             }
           ]
-        },
+        }/*,
         passwordConfirm: {
           identifier: 'passwordConfirm',
           rules: [
@@ -71,7 +78,7 @@ export class UserManagerComponent implements OnInit {
               prompt: 'Passwords must match'
             }
           ]
-        }
+        }*/
       },
       inline: true,
       onSuccess: function(e){
@@ -99,7 +106,8 @@ export class UserManagerComponent implements OnInit {
   };
 
   public changePassword = (id: number, password: string): void => {
-    this.validateForm();
+    console.log(this.validateForm());
+    console.log("ID: ", id, "\tPass: ", password);
     if(this.validateForm() === true){
     this.apiFunctions.updateData(`/users/${id}`, password).subscribe(data => {
       console.log("Password Changed: ", data);
@@ -162,7 +170,7 @@ export class UserManagerComponent implements OnInit {
 
   public hidePopUp = (data?: any): void => {
     console.log(this.focusedId);
-    $(`.ui.icon.button.${this.focusedId}`).popup('hide');
+    $(`.ui.icon.button.24536`).popup('hide');
   }
 
   public viewOne = (data?: any): void => {
@@ -238,6 +246,8 @@ export class UserManagerComponent implements OnInit {
     this.resetForm = this._fb.group({
       password: ["", [Validators.required]],
     });
+
+    this.observeForm();
   };
 
   public hideElements = (): void => {
