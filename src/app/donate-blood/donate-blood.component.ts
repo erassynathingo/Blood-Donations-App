@@ -82,7 +82,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     console.log("Donor Application: ", model);
     this.apiFunctions.register(`/donate`, model).subscribe(data=>{
 
-      this.router.navigate(['/user-manager']);
+      this.router.navigate(['/donations']);
       console.log(data);
     }, error => {
       console.log(error);
@@ -95,7 +95,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     /** @todo Remove this function */
     this.donorForm.valueChanges.subscribe(value => {
       Logger.info(value);
-      this.validateForm();
+      //this.validateForm();
     });
   };
 

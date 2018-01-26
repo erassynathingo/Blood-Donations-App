@@ -143,7 +143,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         console.log("Not Admin");
         $('.admin').hide();
       }else {
-        console.log("Doctor");
+        console.log("Admin");
+        $('.admin').show();
       }
     }
   }

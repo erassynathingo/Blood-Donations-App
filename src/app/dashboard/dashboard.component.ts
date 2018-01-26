@@ -158,6 +158,7 @@ export class DashboardComponent implements OnInit {
       $('.admin').hide();
     } else {
       console.log("Doctor");
+      $('.admin').show();
     }
   }
 }

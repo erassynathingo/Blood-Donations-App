@@ -40,7 +40,7 @@
                 </button>
               </td>
               <td>{{app.personalInfo.title}}. {{app.personalInfo.firstName}} {{app.personalInfo.lastName}}</td>
-              <td>{{app.personalInfo.dateOfBirth}}</td>
+              <td>{{app.personalInfo.dateOfBirth || 'N/A'}}</td>
               <td>{{app.personalInfo.town}}</td>
               <td>{{app.personalInfo.occupation}}</td>
               <td>{{app.personalInfo.cellNumber.code}} {{app.personalInfo.cellNumber.number}}</td>

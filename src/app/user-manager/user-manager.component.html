@@ -87,45 +87,34 @@
     <div class="content">
 
       <div class="ui">
-
-        <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
         <div class="ui container">
           <div class="content">
-            <div class="ui segment">
-              <div class="ui grid">
-                <div class="four wide column">
-
-                  <h4 class="header black">ID Number: &nbsp;&nbsp;
-                    <span class="ui blue">{{ currentUser._id || 0}}</span>
-                  </h4>
+              <div class="ui centered card">
+                  <div class="image">
+                    <!-- <img src="/images/avatar2/large/kristy.png"> -->
+                    <i class="massive icons">
+                        <i class="address card outline red icon"></i>
+                        <!-- <i class="top right corner zoom green tiny icon"></i> -->
+                      </i>
+                  </div>
+                  <div class="content">
+                    <a class="header">{{currentUser.firstName}} {{currentUser.lastName}}</a>
+                    <br/>
+                    <div class="meta">
+                      <span class="date">Joined:  <strong class='red'>{{ currentUser.entry_date | date}}</strong></span>
+                    </div>
+                    <br/>
+                    <div class="description">
+                      <strong class='red'>{{currentUser.firstName}}</strong> &nbsp;  can &nbsp;    <strong class='blue'>{{ currentUser.permissions || n/a}}</strong>
+                    </div>
+                  </div>
+                  <div class="extra content">
+                    <a>
+                      <i class="mail icon blue"></i>
+                      {{ currentUser.email || n/a}}
+                    </a>
+                  </div>
                 </div>
-                <div class="four wide column">
-
-                  <h4 class="header black">Email &nbsp;&nbsp;
-                    <span class="ui blue">{{ currentUser.email || n/a}}</span>
-                  </h4>
-                </div>
-                <div class="four wide column">
-                  <h4 class="header black">Username: &nbsp;&nbsp;
-                    <span class="ui blue">{{ currentUser.username || n/a}}</span>
-                  </h4>
-                </div>
-
-
-                <div class="four wide column">
-                  <h4 class="header black">Permissions: &nbsp;&nbsp;
-                    <span class="ui blue">{{ currentUser.permissions || n/a}}</span>
-                  </h4>
-                </div>
-
-                <div class="six wide column">
-                  <h4 class="header black">Entry Date: &nbsp;&nbsp;
-                    <span class="ui blue">{{ currentUser.entry_date || n/a}}</span>
-                  </h4>
-                </div>
-
-              </div>
-            </div>
           </div>
         </div>
         <br/>
@@ -140,26 +129,6 @@
           </div>
         </div>
 
-        <div class="ui card">
-            <div class="image">
-              <img src="/images/avatar2/large/kristy.png">
-            </div>
-            <div class="content">
-              <a class="header">Kristy</a>
-              <div class="meta">
-                <span class="date">Joined in 2013</span>
-              </div>
-              <div class="description">
-                Kristy is an art director living in New York.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                22 Friends
-              </a>
-            </div>
-          </div>
 
       </div>
     </div>
@@ -294,7 +263,7 @@
   <div class="ui text loader">Creating User</div>
 </div>
 
-<div class="ui inverted dimmer page changePasswordDimmer">
+<div class="ui inverted dimmer page changePasswordloader">
   <div class="ui text loader">Changing Password</div>
 </div>
 

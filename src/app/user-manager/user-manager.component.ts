@@ -40,7 +40,7 @@ export class UserManagerComponent implements OnInit {
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')) == null
       ? { firstName: '', lastName: '' }
       : JSON.parse(localStorage.getItem('currentUser'));
-     this.hideElements();
+    this.hideElements();
   }
 
   ngOnInit() {
@@ -81,7 +81,7 @@ export class UserManagerComponent implements OnInit {
         }*/
       },
       inline: true,
-      onSuccess: function(e){
+      onSuccess: function (e) {
         e.preventDefault();
         e.stopPropagation();
         return false;
@@ -108,20 +108,28 @@ export class UserManagerComponent implements OnInit {
   public changePassword = (id: number, password: string): void => {
     console.log(this.validateForm());
     console.log("ID: ", id, "\tPass: ", password);
-    if(this.validateForm() === true){
-    this.apiFunctions.updateData(`/users/${id}`, password).subscribe(data => {
-      console.log("Password Changed: ", data);
-      setTimeout(() => {
-        this.closeDimmer('.ui.page.inverted.changePasswordDimmer');
-        this.pnotify.success('Password has been reset', 3000, 'Success');
-      }, 1000);
-    },
-      error => {
-        Logger.log(`${JSON.stringify(error)}`);
-        console.log(error);
-        const resp = JSON.parse(error.body);
-        this.pnotify.error(resp.message, 3000, "Password Reset Error");
+    if (this.validateForm() === true) {
+      this.closeDimmer('.ui.page.resetPasswordModal');
+      $('.ui.page.addUserForm').dimmer('show', {
+        duration: {
+          show: 1000,
+          hide: 500
+        }
       });
+      this.apiFunctions.updateData(`/users/${id}`, password).subscribe(data => {
+        console.log("Password Changed: ", data);
+        setTimeout(() => {
+          $('.ui.page.addUserForm').dimmer('hide');
+          this.pnotify.success('Password has been reset', 3000, 'Success');
+        }, 1000);
+      },
+        error => {
+          $('.ui.page.addUserForm').dimmer('hide');
+          Logger.log(`${JSON.stringify(error)}`);
+          console.log(error);
+          const resp = JSON.parse(error.body);
+          this.pnotify.error(resp.message, 3000, "Password Reset Error");
+        });
     }
   }
 
@@ -185,6 +193,7 @@ export class UserManagerComponent implements OnInit {
   }
 
   public addUser = (): void => {
+    this.currentUser = {};
     $('.ui.page.addUserForm').dimmer('show');
     $('.ui .dropdown').dropdown();
 
@@ -253,12 +262,12 @@ export class UserManagerComponent implements OnInit {
   public hideElements = (): void => {
     if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
       $('.doctor, .admin').hide();
-    }else {
+    } else {
       console.log("Role: ", localStorage.getItem('role'));
       if (localStorage.getItem('role') !== 'Admin') {
         console.log("Not Admin");
         $('.admin').hide();
-      }else {
+      } else {
         console.log("Doctor");
       }
     }
