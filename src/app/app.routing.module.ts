@@ -1,3 +1,4 @@
+import { RemoteComponent } from './remote/remote.component';
 import { DonationsComponent } from './donations/donations.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AboutComponent } from './about/about.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'camps', component: CampsComponent },
     { path: 'about', component: AboutComponent },
     { path: 'donations', component: DonationsComponent },
+    { path: 'remote', component: RemoteComponent },
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: '/dashboard' }
 ];

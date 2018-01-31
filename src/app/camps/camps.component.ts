@@ -15,7 +15,7 @@ import {
   styleUrls: ["./camps.component.css"]
 })
 export class CampsComponent implements OnInit {
-  title: string = "Nearby Blood Donation Camps";
+  title: string = "Fixed Blood Donation Camps";
   lat: number = -22.5609;
   lng: number = 17.0658;
   zoom: number = 8;

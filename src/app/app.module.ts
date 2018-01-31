@@ -1,3 +1,4 @@
+import { RemoteComponent } from './remote/remote.component';
 import { DonationsComponent } from './donations/donations.component';
 import { AboutComponent } from './about/about.component';
 import { BrowserModule } from "@angular/platform-browser";
@@ -33,7 +34,8 @@ import { AuthGuard } from './_guards/auth.guard';
     CampsComponent,
     LoginComponent,
     DonationsComponent,
-    AboutComponent
+    AboutComponent,
+    RemoteComponent
   ],
   imports: [
     BrowserModule,
