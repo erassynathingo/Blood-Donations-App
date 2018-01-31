@@ -45,12 +45,6 @@ export class CampsComponent implements OnInit {
       lng: 14.509828,
       label: 'Walvis Bay Donation Center',
       draggable: false
-    },
-    {
-      lat: -22.427592,
-      lng: 14.982251,
-      label: 'Bank WHK Welwitchia Insurance',
-      draggable: true
     }
   ]
 
