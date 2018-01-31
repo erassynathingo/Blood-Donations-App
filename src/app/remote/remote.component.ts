@@ -27,6 +27,19 @@ export class RemoteComponent implements OnInit, AfterViewInit {
       lng: 17.0584,
       label: 'University of Namibia',
       draggable: false
+    },
+    {
+      lat: -22.6191,
+      lng: 17.0943,
+      label: 'Grove Mall',
+      draggable: false
+    },
+
+    {
+      lat: -22.52596217360742,
+      lng: 17.0796423,
+      label: 'Namib Mills',
+      draggable: false
     }
   ];
 
