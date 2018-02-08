@@ -11,6 +11,7 @@ import { DonateBloodComponent } from './donate-blood/donate-blood.component';
 import { BloodBankComponent } from './blood-bank/blood-bank.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { CampsComponent } from './camps/camps.component';
+import { RequestComponent } from './request/request.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'blood-bank', component: BloodBankComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'user-manager', component: UserManagerComponent, canActivate: [AuthGuard] },
+    { path: 'request', component: RequestComponent, canActivate: [AuthGuard] },
     { path: 'camps', component: CampsComponent },
     { path: 'about', component: AboutComponent },
     { path: 'donations', component: DonationsComponent },

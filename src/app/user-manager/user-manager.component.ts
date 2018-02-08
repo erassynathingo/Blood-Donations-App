@@ -208,6 +208,7 @@ export class UserManagerComponent implements OnInit {
 
   public submitForm = (model: any): void => {
     model.permissions = $('#permissions').dropdown('get value');
+    model.role = $('#role').dropdown('get value');
     console.log("FORM: ", model);
     this.closeDimmer('.ui.page.addUserForm');
     $('.ui.inverted.dimmer.page.userSubmit').dimmer('show', {
@@ -247,7 +248,7 @@ export class UserManagerComponent implements OnInit {
       lastName: ["", [Validators.required]],
       password: ["", [Validators.required]],
       email: ["", [Validators.required]],
-      role: ["Donor", [Validators.required]]
+      role: ["", [Validators.required]]
     });
   };
 

@@ -23,6 +23,7 @@ import { CORSService } from "./services/cors.service";
 import { AgmCoreModule } from '@agm/core';
 import { ChartsModule} from 'ng2-charts';
 import { AuthGuard } from './_guards/auth.guard';
+import { RequestComponent } from './request/request.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { AuthGuard } from './_guards/auth.guard';
     LoginComponent,
     DonationsComponent,
     AboutComponent,
-    RemoteComponent
+    RemoteComponent,
+    RequestComponent
+
   ],
   imports: [
     BrowserModule,

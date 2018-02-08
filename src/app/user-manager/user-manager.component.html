@@ -178,19 +178,30 @@
                 <h5 class="ui dividing red header">Personal Information</h5>
                 <div class="field">
                   <div class="fields">
-                    <div class="twelve ui wide field required">
+                    <div class="four ui wide field required">
                       <label>First Name</label>
                       <input type="text" name="firstName" formControlName="firstName" placeholder="First Name" required>
                     </div>
 
-                    <div class="twelve ui wide field required">
+                    <div class="four ui wide field required">
                       <label>Last Name</label>
                       <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name" required>
                     </div>
 
-                    <div class="twelve ui wide field required">
+                    <div class="four ui wide field required">
                       <label>ID Number</label>
                       <input type="tel" name="id_number" max="11" min="11" formControlName="id_number" placeholder="ID Number" required>
+                    </div>
+
+                    <div class="four ui wide field required">
+                      <label>Role</label>
+                      <select class="ui dropdown fluid search" id='role'>
+                        <option value=""></option>
+                        <option value="Doctor">Doctor</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Donor">Donor</option>
+                        <option value="Super_Admin">Super Admin</option>
+                      </select>
                     </div>
 
 

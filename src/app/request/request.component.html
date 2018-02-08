@@ -1,0 +1,62 @@
+<div class="ui middle aligned blurring center aligned grid request content">
+  <div class="ui segment">
+    <br/>
+    <div class="ui segment">
+      <h1 id="chart-container center Bold">Request Blood</h1>
+      <br/>
+      <br/>
+      <br/>
+      <!--  Request  -->
+      <div class="ui container">
+        <form class="ui form" [formGroup]="requestForm" novalidate>
+          <div class="ui form">
+            <div class="four fields">
+              <div class="field">
+                <label>Requestor: </label>
+                <strong>{{loggedInUser.firstName}} {{loggedInUser.lastName}}</strong>
+              </div>
+              <div class="field">
+                <label>Select Blood Type:</label>
+                <select class="ui dropdown fluid search" id='blood_type'>
+                  <option value=""></option>
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Enter Amount (l)</label>
+                <input type="number" formControlName="amount" placeholder="litres">
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <div class="ui green button" (click)='request(requestForm.value)'>Request</div>
+          </div>
+        </form>
+      </div>
+      <!--  Request  ends -->
+    </div>
+  </div>
+
+  <div class="ui page dimmer" style="height: 100000px !important">
+      <div class="content">
+        <div class="center">
+          <div class="ui inverted">
+            <h2>Requesting</h2>
+            <i class="huge icons">
+                <i class="big spinner loading icon"></i>
+                <i class="question icon"></i>
+            </i>
+            <h4 class="ui red">Please Wait..</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

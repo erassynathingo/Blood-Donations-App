@@ -32,6 +32,7 @@ export class DonationsComponent implements OnInit {
       this.initSearch(this.Donations);
     }, error => {
       const resp = JSON.parse(error.body);
+      console.log("Err: ", error);
       this.pnotify.error(resp.message, 3000, "Fetch Error");
     });
 
