@@ -122,6 +122,7 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getAllBloodCounts();
+    this.hideElements();
   }
 
   public getAllBloodCounts = (data?: any): void => {
@@ -156,6 +157,8 @@ export class DashboardComponent implements OnInit {
     if (localStorage.getItem('role') !== 'Admin') {
       console.log("Not Admin");
       $('.admin').hide();
+    }else if (localStorage.getItem('role') !== 'Super_Admin') {
+      $('.Super_Admin').hide();
     } else {
       console.log("Doctor");
       $('.admin').show();

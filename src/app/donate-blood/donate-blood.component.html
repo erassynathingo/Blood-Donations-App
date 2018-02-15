@@ -77,6 +77,21 @@
                 <label>ID Number</label>
                 <input type="text" name="idNumber" formControlName="idNumber" placeholder="ID Number" required>
               </div>
+
+              <div class="five ui wide field required">
+                <label>Blood Type</label>
+                <select class="ui dropdown fluid search" formControlName="bloodType" id="bloodType" name="bloodType">
+                  <option value="">Blood Type</option>
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="field">
@@ -85,7 +100,7 @@
                 <label>Date Of Birth</label>
                 <div class="ui input left icon">
                   <i class="calendar icon"></i>
-                  <input type="text" formControlName="dateOfBirth" placeholder="Date of Birth">
+                  <input type="text" id='dateOfBirthValue' formControlName="dateOfBirth" placeholder="Date of Birth">
                 </div>
               </div>
 

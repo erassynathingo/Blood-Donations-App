@@ -26,7 +26,6 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
     private router: Router
   ) {
     this.createForm();
-    this.hideElements();
 
   }
 
@@ -78,9 +77,11 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
   public submitForm = (model: any, valid: boolean): void => {
     this.submitted = true;
     model.personalInfo.language = $('#language').dropdown('get value');
+    model.personalInfo.bloodType = $('#bloodType').dropdown('get value');
+    model.personalInfo.dateOfBirth = $('#dateOfBirthValue').val();
 
     console.log("Donor Application: ", model);
-    this.apiFunctions.register(`/donate`, model).subscribe(data=>{
+    this.apiFunctions.register(`/donate`, model).subscribe(data => {
 
       this.router.navigate(['/donations']);
       console.log(data);
@@ -143,6 +144,7 @@ export class DonateBloodComponent implements OnInit, AfterViewInit {
       title: ["", [Validators.required, Validators.maxLength(5)]],
       firstName: ["", [Validators.required]],
       lastName: ["", [Validators.required]],
+      bloodType: ["", [Validators.required]],
       maidenName: ["", [Validators.required]],
       idNumber: ["", [Validators.required]],
       dateOfBirth: ["", [Validators.required]],

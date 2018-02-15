@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-	selector: 'request',
-	templateUrl: 'request.component.html'
+  selector: 'request',
+  templateUrl: 'request.component.html'
 })
 
 export class RequestComponent implements OnInit {
@@ -15,6 +15,9 @@ export class RequestComponent implements OnInit {
 
   loggedInUser: any;
   requestForm: FormGroup; // Login form Model
+  date: string;
+
+
 
   constructor(
     private _fb: FormBuilder,
@@ -23,27 +26,53 @@ export class RequestComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
 
-  ) {}
+  ) {
+    this.createForm();
+    this.observeForm();
+    $(".ui.calendar.date").calendar({
+      onChange: function (date, text) {
+        console.log("changed: ", date, "\ntext: ", text);
+        this.date = text;
+      }
+    });
+
+    this.hideElements();
+  }
   ngOnInit() {
     // Initiating Calendar Functions
     this.initSemanticFunctions();
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')) == null
       ? { firstName: '', lastName: '' }
       : JSON.parse(localStorage.getItem('currentUser'));
-      this.createForm();
+
+  }
+
+
+
+  private observeForm = (data?: any): void => {
+    /** @todo Remove this function */
+    this.requestForm.valueChanges.subscribe(value => {
+      console.log("form: ", value);
+    });
   }
 
   private initSemanticFunctions = (): void => {
     $(".ui.dropdown").dropdown();
     $(".ui.radio.checkbox").checkbox();
     $(".ui.checkbox").checkbox();
+    $("#date").calendar({
+      onChange: function (date, text) {
+        console.log("changed: ", date, "\ntext: ", text);
+        this.date = text;
+      }
+    });
   }
 
   public request = (model): void => {
-      $(".request").dimmer("show");
+    $(".request").dimmer("show");
     model.requester = this.loggedInUser.id_number;
     model.blood_type = $('#blood_type').dropdown('get value');
-    console.log("Model: ", model);
+    model.date = $('#dateValue').val();
 
     this.apiFunctions.postData("/users/request", model).subscribe(
       data => {
@@ -51,6 +80,10 @@ export class RequestComponent implements OnInit {
           $(".request").dimmer("hide");
           console.log("Req resp: ", data);
           this.pnotify.success(data.message, 15000, "Request Received");
+            // tslint:disable-next-line:max-line-length
+            data.response.accepted === undefined ? null : this.pnotify.success(data.response.accepted, 15000, "Successful Emails Sent to Donors");
+            // tslint:disable-next-line:max-line-length
+            data.response.rejected.length === 0 ? null : this.pnotify.error(data.response.rejected, 15000, "Unsuccessful Emails Sent to Donors");
         }, 3000);
       },
       error => {
@@ -67,7 +100,22 @@ export class RequestComponent implements OnInit {
     this.requestForm = this._fb.group({
       requester: ["", [Validators.required]],
       blood_type: ["", [Validators.required]],
-      amount: ["", [Validators.required]]
+      amount: ["", [Validators.required]],
+      date: ["", [Validators.required]]
     });
+  }
+
+  public hideElements = (): void => {
+    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
+      $('.doctor, .admin').hide();
+    } else {
+      console.log("Role: ", localStorage.getItem('role'));
+      if (localStorage.getItem('role') !== 'Admin') {
+        console.log("Not Admin");
+        $('.admin').hide();
+      } else {
+        console.log("Doctor");
+      }
+    }
   }
 }

@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.createLoginForm();
     this.createRegisterForm();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    localStorage.setItem('role', 'Admin');
   }
 
   public createLoginForm = (data?: any): void => {
@@ -65,8 +66,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
     $(".ui.modal").modal();
-
-    localStorage.setItem('role', 'Admin');
   }
 
   ngAfterViewInit(): void {
@@ -74,8 +73,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public login = (model: any): void => {
-    if (model.role !== "") {
-
       Logger.log(model);          /**@todo remove */
       $(".login").dimmer("show");
       this.apiFunctions.login("/auth", model).subscribe(
@@ -87,9 +84,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
             this.appComponent.activateUser();
             this.userService.getUser().then(data => this.User = data);
             this.router.navigate([this.returnUrl]);
-            localStorage.setItem('role', model.role);
+            localStorage.setItem('role', user.role);
             $(".fixed.menu").transition("horizontal flip");
-            this.hideElements();
           }, 3000);
         },
         error => {
@@ -102,10 +98,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
           }, 3000);
         }
       );
-    } else {
-      this.pnotify.error("Please Select a Role", 3000, "Login Error");
-      $(".ui.card").transition("shake");
-    }
   }
 
   public prepareDash = (): void => {

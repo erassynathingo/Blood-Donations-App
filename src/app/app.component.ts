@@ -13,6 +13,7 @@ import { User } from "./login/user";
 })
 export class AppComponent implements OnInit {
   title = "Blood Donations Admin";
+  currentRole: any;
 
   constructor(
     private apiFunctions: APIFunctionsService,
@@ -20,8 +21,6 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private pnotify: Pnotify
   ) {
-    console.log(JSON.parse(localStorage.getItem("currentUser")) == null);
-    this.hideElements();
 
   }
 
@@ -29,15 +28,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
-    this.User =
-      JSON.parse(localStorage.getItem("currentUser")) == null
+    this.User = JSON.parse(localStorage.getItem("currentUser")) == null
         ? { firstName: "Guest", lastName: "Donor" }
         : JSON.parse(localStorage.getItem("currentUser"));
+        // tslint:disable-next-line:max-line-length
+        console.log("current Role INIT: ", localStorage.getItem("role"));
 
-        localStorage.setItem('role', 'Admin');
   }
 
   public logout = (data?: any): void => {
+    this.router.navigate(['/login']);
     this.apiFunctions.logout("/auth").subscribe(
       resp => {
         console.log(resp);

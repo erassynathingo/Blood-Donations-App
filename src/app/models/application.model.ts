@@ -13,6 +13,7 @@ export interface donorDetails {
   maidenName: string;
   dateOfBirth: Date;
   gender: string;
+  bloodType: string;
   language: string;
   country: string;
   populationGroup: string;
