@@ -27,6 +27,12 @@ export class AppComponent implements OnInit {
   User: any;
   currentUser: any;
 
+  /** Permissions */
+
+  adminPermissions: Array<String> = ['Admin'];
+  doctorPermissions: Array<String> = ['Doctor'];
+  superAdminPermissions: Array<String> = ['Super_Admin'];
+
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
     this.User = JSON.parse(localStorage.getItem("currentUser")) == null
@@ -79,17 +85,28 @@ export class AppComponent implements OnInit {
     $(element).dimmer('hide');
   }
 
-  public hideElements = (): void => {
-    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
-      $('.doctor, .admin').hide();
-    }else {
-      console.log("Role: ", localStorage.getItem('role'));
-      if (localStorage.getItem('role') !== 'Admin') {
-        console.log("Not Admin");
-        $('.administrator').hide();
-      }else {
-        console.log("Doctor");
+
+
+  public hideView = (view): Boolean => {
+    console.log(channelArray.includes("three"));
+    switch(view){
+      case: 'Doctor': {
+        return this.doctorPermissions.includes(this.User.role);
+        break;
+      }
+      case: 'Admin': {
+        return this.doctorPermissions.includes(this.User.role);
+        break;
+      }
+      case: 'Super_Admin': {
+        return this.doctorPermissions.includes(this.User.role);
+        break;
+      }
+      case: 'Donor': {
+        return this.doctorPermissions.includes(this.User.role);
+        break;
       }
     }
+    return true;
   }
 }
