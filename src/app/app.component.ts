@@ -87,7 +87,7 @@ export class AppComponent implements OnInit {
 
 
 
-  public hideView = (view): Boolean => {
+  /*public hideView = (view): Boolean => {
     console.log(channelArray.includes("three"));
     switch(view){
       case: 'Doctor': {
@@ -108,5 +108,5 @@ export class AppComponent implements OnInit {
       }
     }
     return true;
-  }
+  }*/
 }
