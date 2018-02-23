@@ -23,7 +23,9 @@
             <td>{{user.firstName}} {{user.lastName}}</td>
             <td>{{user.username}}</td>
             <td>{{user.entry_date | date}}</td>
-            <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
+            <td>
+              <a href="mailto:{{user.email}}">{{user.email}}</a>
+            </td>
             <td>
               <span *ngFor='let per of user.permissions'> {{per}} </span>
             </td>
@@ -35,18 +37,23 @@
                 <i class="key icon blue resetPasswordButton"></i>
               </button>
 
-              <button class="ui icon button {{user._id}}" [disabled]="loggedInUser.id_number == user._id " (click)='deletePopUp(user._id)' id={{user._id}}>
+              <button class="ui icon button {{user._id}}" [disabled]="loggedInUser.id_number == user._id " (click)='deletePopUp(user._id)'
+                id={{user._id}}>
                 <i class="trash icon red deleteApplication"></i>
               </button>
 
+              <button class="ui icon button {{user._id}}" (click)='viewLogs(user)' id={{user._id}}>
+                <i class="browser icon violet viewLogs"></i>
+              </button>
+
               <button class="ui icon button" [hidden]="loggedInUser.id_number != user._id" id={{user._id}}>
-                  <i class="user circle outline icon blue"></i>
-                </button>
+                <i class="user circle outline icon blue"></i>
+              </button>
             </td>
           </tr>
         </tbody>
         <tfoot class="full-width">
-           <!-- <tr><th colspan="8">
+          <!-- <tr><th colspan="8">
                 <div class="ui right floated pagination menu">
                   <a class="icon item">
                     <i class="left chevron icon"></i>
@@ -82,39 +89,42 @@
       </table>
     </div>
   </div>
-<!-- ===== VIEW USER MODAL ___ -->
+  <!-- ===== VIEW USER MODAL ___ -->
   <div class="ui dimmer page viewer">
     <div class="content">
 
       <div class="ui">
         <div class="ui container">
           <div class="content">
-              <div class="ui centered card">
-                  <div class="image">
-                    <!-- <img src="/images/avatar2/large/kristy.png"> -->
-                    <i class="massive icons">
-                        <i class="address card outline red icon"></i>
-                        <!-- <i class="top right corner zoom green tiny icon"></i> -->
-                      </i>
-                  </div>
-                  <div class="content">
-                    <a class="header">{{currentUser.firstName}} {{currentUser.lastName}}</a>
-                    <br/>
-                    <div class="meta">
-                      <span class="date">Joined:  <strong class='red'>{{ currentUser.entry_date | date}}</strong></span>
-                    </div>
-                    <br/>
-                    <div class="description">
-                      <strong class='red'>{{currentUser.firstName}}</strong> &nbsp;  can &nbsp;    <strong class='blue'>{{ currentUser.permissions || n/a}}</strong>
-                    </div>
-                  </div>
-                  <div class="extra content">
-                    <a>
-                      <i class="mail icon blue"></i>
-                      {{ currentUser.email || n/a}}
-                    </a>
-                  </div>
+            <div class="ui centered card large">
+              <div class="image">
+                <!-- <img src="/images/avatar2/large/kristy.png"> -->
+                <i class="massive icons">
+                  <i class="address card outline red icon"></i>
+                  <!-- <i class="top right corner zoom green tiny icon"></i> -->
+                </i>
+              </div>
+              <div class="content">
+                <a class="header">{{currentUser.firstName}} {{currentUser.lastName}}</a>
+                <br/>
+                <div class="meta">
+                  <span class="date">Joined:
+                    <strong class='red'>{{ currentUser.entry_date | date}}</strong>
+                  </span>
                 </div>
+                <br/>
+                <div class="description">
+                  <strong class='red'>{{currentUser.firstName}}</strong> &nbsp; can &nbsp;
+                  <strong class='blue'>{{ currentUser.permissions || n/a}}</strong>
+                </div>
+              </div>
+              <div class="extra content">
+                <a>
+                  <i class="mail icon blue"></i>
+                  {{ currentUser.email || n/a}}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         <br/>
@@ -159,185 +169,227 @@
 
 
 
-</div>
+  </div>
 
-    <!-- ===== Add User Form ___ -->
+  <!-- ===== Add User Form ___ -->
 
-<div class="ui dimmer page addUserForm">
-  <div class="content">
+  <div class="ui dimmer page addUserForm">
+    <div class="content">
 
-    <div class="ui inverted">
+      <div class="ui inverted">
 
-      <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
-      <div class="ui container">
-        <div class="content">
-          <div class="ui segment">
-            <form action="" [formGroup]="registrationForm" novalidate class="ui form">
+        <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+        <div class="ui container">
+          <div class="content">
+            <div class="ui segment">
+              <form action="" [formGroup]="registrationForm" novalidate class="ui form">
 
-              <div id="personalInformation" class="ui segment form-group">
-                <h5 class="ui dividing red header">Personal Information</h5>
-                <div class="field">
-                  <div class="fields">
-                    <div class="four ui wide field required">
-                      <label>First Name</label>
-                      <input type="text" name="firstName" formControlName="firstName" placeholder="First Name" required>
+                <div id="personalInformation" class="ui segment form-group">
+                  <h5 class="ui dividing red header">Personal Information</h5>
+                  <div class="field">
+                    <div class="fields">
+                      <div class="four ui wide field required">
+                        <label>First Name</label>
+                        <input type="text" name="firstName" formControlName="firstName" placeholder="First Name" required>
+                      </div>
+
+                      <div class="four ui wide field required">
+                        <label>Last Name</label>
+                        <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name" required>
+                      </div>
+
+                      <div class="four ui wide field required">
+                        <label>ID Number</label>
+                        <input type="tel" name="id_number" max="11" min="11" formControlName="id_number" placeholder="ID Number" required>
+                      </div>
+
+                      <div class="four ui wide field required">
+                        <label>Role</label>
+                        <select class="ui dropdown fluid search" id='role'>
+                          <option value=""></option>
+                          <option value="Doctor">Doctor</option>
+                          <option value="Admin">Admin</option>
+                          <option value="Donor">Donor</option>
+                          <option value="Super_Admin">Super Admin</option>
+                        </select>
+                      </div>
+
+
                     </div>
-
-                    <div class="four ui wide field required">
-                      <label>Last Name</label>
-                      <input type="text" name="lastName" formControlName="lastName" placeholder="Last Name" required>
-                    </div>
-
-                    <div class="four ui wide field required">
-                      <label>ID Number</label>
-                      <input type="tel" name="id_number" max="11" min="11" formControlName="id_number" placeholder="ID Number" required>
-                    </div>
-
-                    <div class="four ui wide field required">
-                      <label>Role</label>
-                      <select class="ui dropdown fluid search" id='role'>
-                        <option value=""></option>
-                        <option value="Doctor">Doctor</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Donor">Donor</option>
-                        <option value="Super_Admin">Super Admin</option>
-                      </select>
-                    </div>
-
-
                   </div>
-                </div>
 
 
 
-                <!-- Line 3 -->
-                <div class="field">
-                  <div class="fields">
+                  <!-- Line 3 -->
+                  <div class="field">
+                    <div class="fields">
                       <div class="six ui wide field required">
-                          <label>Username</label>
-                          <input type="text" name="username" formControlName="username" placeholder="username" required>
-                        </div>
+                        <label>Username</label>
+                        <input type="text" name="username" formControlName="username" placeholder="username" required>
+                      </div>
                       <div class="six ui wide field required">
-                          <label>Email</label>
-                          <input type="email" name="email" formControlName="email" placeholder="Email" required>
-                        </div>
+                        <label>Email</label>
+                        <input type="email" name="email" formControlName="email" placeholder="Email" required>
+                      </div>
 
-                        <div class="seven ui wide field required">
-                          <label>Permissions</label>
-                          <select class="ui dropdown fluid multiple search" id='permissions'>
-                            <option value=""></option>
-                            <option value="Read">Read</option>
-                            <option value="Delete">Delete</option>
-                            <option value="Update">Update</option>
-                            <option value="Create">Create</option>
-                            <option value="Patch">Patch</option>
-                          </select>
-                        </div>
+                      <div class="seven ui wide field required">
+                        <label>Permissions</label>
+                        <select class="ui dropdown fluid multiple search" id='permissions'>
+                          <option value=""></option>
+                          <option value="Read">Read</option>
+                          <option value="Delete">Delete</option>
+                          <option value="Update">Update</option>
+                          <option value="Create">Create</option>
+                          <option value="Patch">Patch</option>
+                        </select>
+                      </div>
 
-                    <div class="four ui wide field required">
-                      <label>Password</label>
-                      <input type="password" name="password" formControlName="password" placeholder="Password" required>
+                      <div class="four ui wide field required">
+                        <label>Password</label>
+                        <input type="password" name="password" formControlName="password" placeholder="Password" required>
+                      </div>
+                    </div>
+                  </div>
+                  <br/>
+                  <br/>
+
+                  <div class="ui button animated red right large" tabindex="0" (click)='submitForm(registrationForm.value)'>
+                    <div class="visible content">Submit Application</div>
+                    <div class="hidden content">
+                      <i class="right arrow icon"></i>
+                    </div>
+                  </div>
+
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+
+                  <div class="ui animated circular button" (click)='closeDimmer(".ui.dimmer.page.addUserForm")'>
+                    <div class="hidden content red">Close</div>
+                    <div class="visible content">
+                      <i class="remove icon red"></i>
                     </div>
                   </div>
                 </div>
-                <br/>
-                <br/>
+              </form>
 
-                <div class="ui button animated red right large" tabindex="0" (click)='submitForm(registrationForm.value)'>
-                  <div class="visible content">Submit Application</div>
-                  <div class="hidden content">
-                    <i class="right arrow icon"></i>
-                  </div>
-                </div>
-
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-
-                <div class="ui animated circular button" (click)='closeDimmer(".ui.dimmer.page.addUserForm")'>
-                  <div class="hidden content red">Close</div>
-                  <div class="visible content">
-                    <i class="remove icon red"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
-
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="ui inverted dimmer page userSubmit">
-  <div class="ui text loader">Creating User</div>
-</div>
+  <div class="ui inverted dimmer page userSubmit">
+    <div class="ui text loader">Creating User</div>
+  </div>
 
-<div class="ui inverted dimmer page changePasswordloader">
-  <div class="ui text loader">Changing Password</div>
-</div>
+  <div class="ui inverted dimmer page changePasswordloader">
+    <div class="ui text loader">Changing Password</div>
+  </div>
 
-    <!-- ===== Add User Form ___ -->
-
+  <!-- ===== Add User Form ___ -->
 
 
 
-<div class="ui dimmer page resetPasswordModal">
-  <div class="content">
 
-    <div class="ui inverted">
+  <div class="ui dimmer page resetPasswordModal">
+    <div class="content">
 
-      <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
-      <div class="ui container">
-        <div class="content">
-          <div class="ui segment">
-            <form action="" [formGroup]="resetForm" novalidate class="ui resetPassword form">
+      <div class="ui inverted">
 
-              <div id="personalInformation" class="ui segment form-group">
-                <h5 class="ui dividing red header">Reset Password</h5>
+        <h2 class="header">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
+        <div class="ui container">
+          <div class="content">
+            <div class="ui segment">
+              <form action="" [formGroup]="resetForm" novalidate class="ui resetPassword form">
 
-                <!-- Line 3 -->
-                <div class="field">
-                  <div class="fields">
+                <div id="personalInformation" class="ui segment form-group">
+                  <h5 class="ui dividing red header">Reset Password</h5>
 
-                    <div class="twelve ui wide field required">
-                      <label>New Password</label>
-                      <input type="password"  name="password" placeholder="New Password" required>
+                  <!-- Line 3 -->
+                  <div class="field">
+                    <div class="fields">
+
+                      <div class="twelve ui wide field required">
+                        <label>New Password</label>
+                        <input type="password" name="password" placeholder="New Password" required>
+                      </div>
+
+                      <div class="twelve ui wide field required">
+                        <label>Repeat Password</label>
+                        <input type="password" formControlName="password" name="passwordConfirm" placeholder="Repeat Password" required>
+                      </div>
+
                     </div>
+                  </div>
+                  <br/>
+                  <br/>
 
-                    <div class="twelve ui wide field required">
-                      <label>Repeat Password</label>
-                      <input type="password" formControlName="password" name="passwordConfirm" placeholder="Repeat Password" required>
+                  <div class="ui button red large" tabindex="0">
+                    <div class="content" (click)='changePassword(currentUser._id,resetForm.value)'>Submit</div>
+                  </div>
+
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+
+                  <div class="ui animated circular button" (click)='closeDimmer(".ui.dimmer.page.resetPasswordModal")'>
+                    <div class="hidden content red">Close</div>
+                    <div class="visible content">
+                      <i class="remove icon red"></i>
                     </div>
-
                   </div>
                 </div>
-                <br/>
-                <br/>
+              </form>
 
-                <div class="ui button red large" tabindex="0" >
-                  <div class="content" (click)='changePassword(currentUser._id,resetForm.value)'>Submit</div>
-                </div>
-
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-
-                <div class="ui animated circular button" (click)='closeDimmer(".ui.dimmer.page.resetPasswordModal")'>
-                  <div class="hidden content red">Close</div>
-                  <div class="visible content">
-                    <i class="remove icon red"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
-
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+
+  <!-- ======================= View Logs Dimmer  ====================  -->
+
+  <div class="ui dimmer page viewLogs">
+    <div class="ui segment">
+
+      <div class="ui inverted">
+
+        <h2 class="header">
+          Blood Requests Logs for <span class="ui red">{{currentUser.firstName}} {{currentUser.lastName}}</span>
+          <div class="ui animated circular button right floated" (click)='closeDimmer(".ui.page.viewLogs")'>
+              <div class="hidden content red">Close</div>
+              <div class="visible content">
+                <i class="remove icon red"></i>
+              </div>
+            </div>
+        </h2>
+        <div class="ui container">
+          <div class="content">
+              <table class="ui red table striped inverted red">
+                <thead>
+                  <tr>
+                    <th>Blood Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let action of currentUser.actions">
+                    <td>{{action.blood_type || N/A}}</td>
+                    <td>{{action.amount || N/A}} litres</td>
+                    <td>{{action.date || N/A}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>

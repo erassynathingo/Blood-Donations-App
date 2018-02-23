@@ -187,6 +187,12 @@ export class UserManagerComponent implements OnInit {
     $('.ui.page.viewer').dimmer('show');
   }
 
+  public viewLogs = (user?: any): void => {
+    console.log(`User Logs Passed: `, user);
+    this.currentUser = user;
+    $('.ui.page.viewLogs').dimmer('show');
+  }
+
   public closeDimmer = (element: string): void => {
     console.log("Cloding Dimmer: ", element);
     $(element).dimmer('hide');

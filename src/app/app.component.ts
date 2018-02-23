@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   User: any;
+  currentUser: any;
 
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
         : JSON.parse(localStorage.getItem("currentUser"));
         // tslint:disable-next-line:max-line-length
         console.log("current Role INIT: ", localStorage.getItem("role"));
+        console.log('User: ', this.User);
 
   }
 
@@ -64,6 +66,17 @@ export class AppComponent implements OnInit {
 
     console.log("User: ", this.User);
 
+  }
+
+  public viewOne = (data?: any): void => {
+    console.log(`User Passed: `, data);
+    this.currentUser = this.User;
+    $('.ui.page.viewer').dimmer('show');
+  }
+
+  public closeDimmer = (element: string): void => {
+    console.log("Cloding Dimmer: ", element);
+    $(element).dimmer('hide');
   }
 
   public hideElements = (): void => {

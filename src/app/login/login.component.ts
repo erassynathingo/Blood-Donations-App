@@ -90,7 +90,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
         },
         error => {
           setTimeout(() => {
-            this.errorMessage = <any>error;
             $(".login").dimmer("hide");
             $(".ui.card").transition("shake");
             const resp = JSON.parse(error.body);
@@ -114,13 +113,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/login']);
       },
       error => {
-        this.errorMessage = <any>error;
         console.log("Login ", this.errorMessage);          /**@todo remove */
         let resp = JSON.parse(error.body);
         this.pnotify.error(resp.message, 3000, "Registration Error");
       }
-    );
-  };
+    )
+  }
 
   public registerForm = (): void => $(".ui.registerModal.modal").modal("show");
 
