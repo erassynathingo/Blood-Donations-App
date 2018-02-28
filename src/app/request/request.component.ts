@@ -64,7 +64,8 @@ export class RequestComponent implements OnInit {
       onChange: function (date, text) {
         console.log("changed: ", date, "\ntext: ", text);
         this.date = text;
-      }
+      },
+      minDate: new Date()
     });
   }
 
