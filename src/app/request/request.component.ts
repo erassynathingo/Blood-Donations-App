@@ -80,10 +80,6 @@ export class RequestComponent implements OnInit {
           $(".request").dimmer("hide");
           console.log("Req resp: ", data);
           this.pnotify.success(data.message, 15000, "Request Received");
-            // tslint:disable-next-line:max-line-length
-            data.response.accepted === undefined ? null : this.pnotify.success(data.response.accepted, 15000, "Successful Emails Sent to Donors");
-            // tslint:disable-next-line:max-line-length
-            data.response.rejected.length === 0 ? null : this.pnotify.error(data.response.rejected, 15000, "Unsuccessful Emails Sent to Donors");
         }, 3000);
       },
       error => {

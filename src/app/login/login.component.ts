@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
     $(".ui.modal").modal();
+    $('.no').hide();
   }
 
   ngAfterViewInit(): void {
@@ -73,30 +74,30 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public login = (model: any): void => {
-      Logger.log(model);          /**@todo remove */
-      $(".login").dimmer("show");
-      this.apiFunctions.login("/auth", model).subscribe(
-        user => {
+    Logger.log(model);          /**@todo remove */
+    $(".login").dimmer("show");
+    this.apiFunctions.login("/auth", model).subscribe(
+      user => {
 
-          setTimeout(() => {
-            $(".login").dimmer("hide");
-            this.userService.setUser(user);
-            this.appComponent.activateUser();
-            this.userService.getUser().then(data => this.User = data);
-            this.router.navigate([this.returnUrl]);
-            localStorage.setItem('role', user.role);
-            $(".fixed.menu").transition("horizontal flip");
-          }, 3000);
-        },
-        error => {
-          setTimeout(() => {
-            $(".login").dimmer("hide");
-            $(".ui.card").transition("shake");
-            const resp = JSON.parse(error.body);
-            this.pnotify.error(resp.message, 3000, "Login Error");
-          }, 3000);
-        }
-      );
+        setTimeout(() => {
+          $(".login").dimmer("hide");
+          this.userService.setUser(user);
+          this.appComponent.activateUser();
+          this.userService.getUser().then(data => this.User = data);
+          this.router.navigate(['/dashboard']);
+          localStorage.setItem('role', user.role);
+          $(".fixed.menu").transition("horizontal flip");
+        }, 3000);
+      },
+      error => {
+        setTimeout(() => {
+          $(".login").dimmer("hide");
+          $(".ui.card").transition("shake");
+          const resp = JSON.parse(error.body);
+          this.pnotify.error(resp.message, 3000, "Login Error");
+        }, 3000);
+      }
+    );
   }
 
   public prepareDash = (): void => {
@@ -125,17 +126,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public closeModal = (): void => $(".ui.modal").modal("hide");
 
   public hideElements = (): void => {
-    if ((JSON.parse(localStorage.getItem("currentUser")) == null) === true) {
-      $('.doctor, .admin').hide();
-    }else {
-      console.log("Role: ", localStorage.getItem('role'));
-      if (localStorage.getItem('role') !== 'Admin') {
-        console.log("Not Admin");
-        $('.admin').hide();
-      }else {
-        console.log("Admin");
-        $('.admin').show();
-      }
-    }
+    $('.no').hide();
   }
 }

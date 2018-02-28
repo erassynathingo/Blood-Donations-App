@@ -21,26 +21,82 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private pnotify: Pnotify
   ) {
-
+    console.log("ROLE: : ", this.User.role);
+    console.log("Users: ", this.hideView('UserManagerComponent'));
+    console.log("Bank: ", this.hideView('BloodBankComponent'));
+    console.log("Request: ", this.hideView('RequestComponent'));
+    console.log("Donations: ", this.hideView('DonationsComponent'));
+    console.log("Donate: ", this.hideView('DonateBloodComponent'));
   }
 
-  User: any;
+  User: any = {
+    role: 'Donor'
+  };
   currentUser: any;
+
+  superAdminPermissions: Array<String> = [
+    'AppComponent',
+    'DashboardComponent',
+    'DonateBloodComponent',
+    'BloodBankComponent',
+    'UserManagerComponent',
+    'CampsComponent',
+    'LoginComponent',
+    'DonationsComponent',
+    'AboutComponent',
+    'RemoteComponent',
+    'RequestComponent'
+
+  ];
 
   /** Permissions */
 
-  adminPermissions: Array<String> = ['Admin'];
-  doctorPermissions: Array<String> = ['Doctor'];
-  superAdminPermissions: Array<String> = ['Super_Admin'];
+  adminPermissions: Array<String> = [
+    'AppComponent',
+    'DashboardComponent',
+    'DonateBloodComponent',
+    'BloodBankComponent',
+    'CampsComponent',
+    'LoginComponent',
+    'DonationsComponent',
+    'AboutComponent',
+    'RemoteComponent',
+    'RequestComponent'
+
+  ];
+
+  doctorPermissions: Array<String> = [
+    'AppComponent',
+    'DashboardComponent',
+    'DonateBloodComponent',
+    'BloodBankComponent',
+    'CampsComponent',
+    'LoginComponent',
+    'DonationsComponent',
+    'AboutComponent',
+    'RemoteComponent',
+    'RequestComponent'
+
+  ];
+  donorPermissions: Array<String> = [
+    'AppComponent',
+    'DonateBloodComponent',
+    'CampsComponent',
+    'LoginComponent',
+    'AboutComponent',
+    'RemoteComponent'
+
+  ];
+
 
   ngOnInit(): void {
     $(".ui.dropdown").dropdown();
     this.User = JSON.parse(localStorage.getItem("currentUser")) == null
-        ? { firstName: "Guest", lastName: "Donor" }
-        : JSON.parse(localStorage.getItem("currentUser"));
-        // tslint:disable-next-line:max-line-length
-        console.log("current Role INIT: ", localStorage.getItem("role"));
-        console.log('User: ', this.User);
+      ? { firstName: "Guest", lastName: "Donor" }
+      : JSON.parse(localStorage.getItem("currentUser"));
+    // tslint:disable-next-line:max-line-length
+    console.log("current Role INIT: ", localStorage.getItem("role"));
+    console.log('User: ', this.User);
 
   }
 
@@ -50,7 +106,7 @@ export class AppComponent implements OnInit {
       resp => {
         console.log(resp);
         localStorage.removeItem("currentUser");
-        localStorage.removeItem("role");
+        localStorage.setItem('role', 'Donor');
         this.User.firstName = "Guest";
         this.User.lastName = "Donor";
         this.router.navigate(['/login']);
@@ -87,26 +143,14 @@ export class AppComponent implements OnInit {
 
 
 
-  /*public hideView = (view): Boolean => {
-    console.log(channelArray.includes("three"));
-    switch(view){
-      case: 'Doctor': {
-        return this.doctorPermissions.includes(this.User.role);
-        break;
-      }
-      case: 'Admin': {
-        return this.doctorPermissions.includes(this.User.role);
-        break;
-      }
-      case: 'Super_Admin': {
-        return this.doctorPermissions.includes(this.User.role);
-        break;
-      }
-      case: 'Donor': {
-        return this.doctorPermissions.includes(this.User.role);
-        break;
-      }
-    }
-    return true;
-  }*/
+  public hideView = (view): Boolean => {
+    const permissions = {
+      'Doctor': () => this.doctorPermissions.includes(view),
+      'Admin': () => this.adminPermissions.includes(view),
+      'Super_Admin': () => this.superAdminPermissions.includes(view),
+      'Donor': () => this.donorPermissions.includes(view)
+    };
+    console.log("USER: ", this.User);
+    return permissions[localStorage.getItem('role')]();
+  }
 }

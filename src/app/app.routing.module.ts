@@ -25,8 +25,8 @@ const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'donations', component: DonationsComponent },
     { path: 'remote', component: RemoteComponent },
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    { path: '**', redirectTo: '/dashboard' }
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

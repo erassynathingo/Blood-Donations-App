@@ -118,10 +118,10 @@ export class DashboardComponent implements OnInit {
   ];
 
   constructor(private apiFunction: APIFunctionsService) {
-    this.hideElements();
+    //this.hideElements();
+    this.getAllBloodCounts();
   }
   ngOnInit(): void {
-    this.getAllBloodCounts();
     this.hideElements();
   }
 
