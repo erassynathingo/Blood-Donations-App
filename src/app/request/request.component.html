@@ -51,19 +51,31 @@
     </div>
   </div>
 
-  <div class="ui page dimmer" style="height: 100000px !important">
-      <div class="content">
-        <div class="center">
-          <div class="ui inverted">
-            <h2>Requesting</h2>
-            <i class="huge icons">
-                <i class="big spinner loading icon"></i>
-                <i class="question icon"></i>
-            </i>
-            <h4 class="ui red">Please Wait..</h4>
+  <div class="ui page dimmer requestLoader" style="height: 100000px !important">
+    <div class="content">
+      <div class="center">
+        <div class="ui inverted">
+          <h2>Requesting</h2>
+          <i class="huge icons">
+            <i class="big spinner loading icon"></i>
+            <i class="question icon"></i>
+          </i>
+          <h4 class="ui red">Please Wait..</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui page dimmer confirmRequest">
+    <div class="content">
+      <div class="center">
+        <div class="ui inverted segment">
+          <div class="ui header">Request Blood from Donors?</div>
+          <div class="ui center">
+              <div class="ui button negative" (click)='closeDimmer(".ui.confirmRequest")'>No</div>
+              <div class="ui button positive" (click)='RequestBlood()'>Yes</div>
           </div>
         </div>
       </div>
     </div>
-
-</div>
+  </div>

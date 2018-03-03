@@ -31,7 +31,7 @@
             </td>
             <td>
               <button class="ui icon button" (click)='viewOne(user)' id={{user._id}}>
-                <i class="eye icon green"></i>
+                <i class="eye icon green" (click)='viewOne(user)'></i>
               </button>
               <button class="ui icon button {{user._id}}" id={{user._id}} (click)='resetPasswordDimmer(user)'>
                 <i class="key icon blue resetPasswordButton"></i>
@@ -90,7 +90,7 @@
     </div>
   </div>
   <!-- ===== VIEW USER MODAL ___ -->
-  <div class="ui dimmer page viewer">
+  <div class="ui dimmer page viewer UserOne">
     <div class="content">
 
       <div class="ui">

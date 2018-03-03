@@ -184,7 +184,7 @@ export class UserManagerComponent implements OnInit {
   public viewOne = (data?: any): void => {
     console.log(`User Passed: `, data);
     this.currentUser = data;
-    $('.ui.page.viewer').dimmer('show');
+    $('.ui.page.viewer.UserOne').dimmer('show');
   }
 
   public viewLogs = (user?: any): void => {

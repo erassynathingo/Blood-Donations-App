@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           this.appComponent.activateUser();
           this.userService.getUser().then(data => this.User = data);
           this.router.navigate(['/dashboard']);
-          location.reload();
+          //location.reload();
           localStorage.setItem('role', user.role);
           $(".fixed.menu").transition("horizontal flip");
         }, 3000);

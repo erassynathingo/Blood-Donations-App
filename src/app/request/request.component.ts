@@ -16,6 +16,7 @@ export class RequestComponent implements OnInit {
   loggedInUser: any;
   requestForm: FormGroup; // Login form Model
   date: string;
+  globalForm: any;
 
 
 
@@ -69,23 +70,65 @@ export class RequestComponent implements OnInit {
     });
   }
 
+
+
+  public closeDimmer = (element: string): void => {
+    console.log("Cloding Dimmer: ", element);
+    $(element).dimmer('hide');
+  }
+
   public request = (model): void => {
-    $(".request").dimmer("show");
+    $(".requestLoader").dimmer("show");
     model.requester = this.loggedInUser.id_number;
     model.blood_type = $('#blood_type').dropdown('get value');
     model.date = $('#dateValue').val();
 
-    this.apiFunctions.postData("/users/request", model).subscribe(
+    this.globalForm = model;
+
+    this.apiFunctions.postData("/users/preRequest", model).subscribe(
       data => {
         setTimeout(() => {
-          $(".request").dimmer("hide");
+          $(".ui.requestLoader").dimmer("hide");
           console.log("Req resp: ", data);
           this.pnotify.success(data.message, 15000, "Request Received");
+          if (data.status === 'Enough') {
+            console.log("Not Enough");
+            console.log("Yip");
+          } else if (data.status === 'Not Enough') {
+            this.closeDimmer('.requestLoader');
+            console.log("Not Enough");
+            $('.ui.confirmRequest').dimmer('show');
+          }
+          /**@todo sdfsdf */
         }, 3000);
       },
       error => {
         setTimeout(() => {
           $(".request").dimmer("hide");
+          const resp = JSON.parse(error.body);
+          this.pnotify.error(resp.message, 3000, "Request Error");
+        }, 3000);
+      }
+    );
+  }
+
+  public RequestBlood = (): void => {
+    console.log("Emailing");
+    $(".ui.requestLoader").dimmer("show");
+    $('.ui.confirmRequest').dimmer('hide');
+    this.apiFunctions.postData("/users/request", this.globalForm).subscribe(
+      data => {
+        setTimeout(() => {
+          $(".ui.requestLoader").dimmer("hide");
+          console.log("Req resp: ", data);
+          this.pnotify.success(data.message, 15000, "Success");
+          /**@todo sdfsdf */
+        }, 3000);
+      },
+      error => {
+        setTimeout(() => {
+          $(".request").dimmer("hide");
+          $('.ui.confirmRequest').dimmer('hide');
           const resp = JSON.parse(error.body);
           this.pnotify.error(resp.message, 3000, "Request Error");
         }, 3000);
