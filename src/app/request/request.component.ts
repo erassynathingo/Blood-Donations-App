@@ -17,6 +17,7 @@ export class RequestComponent implements OnInit {
   requestForm: FormGroup; // Login form Model
   date: string;
   globalForm: any;
+  actions: Array<Object> = [];
 
 
 
@@ -45,6 +46,8 @@ export class RequestComponent implements OnInit {
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')) == null
       ? { firstName: '', lastName: '' }
       : JSON.parse(localStorage.getItem('currentUser'));
+
+    this.getUserLogs();
 
   }
 
@@ -134,6 +137,21 @@ export class RequestComponent implements OnInit {
         }, 3000);
       }
     );
+  }
+
+  public getUserLogs = (): void => {
+    console.log(this.loggedInUser.id_number);
+   this.apiFunctions.getOne(`/users/${this.loggedInUser.id_number}`).subscribe(data => {
+      this.actions = data.actions;
+    },
+      error => {
+        setTimeout(() => {
+          $(".request").dimmer("hide");
+          $('.ui.confirmRequest').dimmer('hide');
+          const resp = JSON.parse(error.body);
+          this.pnotify.error(resp.message, 3000, "Request Error");
+        }, 3000);
+      });
   }
 
   public createForm = () => {

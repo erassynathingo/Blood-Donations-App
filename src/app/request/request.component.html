@@ -13,7 +13,7 @@
             <div class="four fields">
               <div class="field">
                 <label>Requestor: </label>
-                <strong>{{loggedInUser.firstName}} {{loggedInUser.lastName}}</strong>
+                <strong style="color: red">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</strong>
               </div>
               <div class="field">
                 <label>Select Blood Type:</label>
@@ -48,6 +48,40 @@
         </form>
       </div>
       <!--  Request  ends -->
+      <!-- - - - Logs - - - - -->
+      <div class="ui inverted">
+
+        <h2 class="header">
+          Blood Requests Logs for <span class="ui red" style="color: red">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</span>
+
+        </h2>
+        <div class="ui container">
+          <div class="content">
+              <table class="ui red table inverted">
+                <thead>
+                  <tr>
+                    <th>Blood Type</th>
+                    <th>Amount</th>
+                    <th>Available Blood</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let action of actions">
+                    <td>{{action.blood_type || N/A}}</td>
+                    <td>{{action.amount || N/A}} litres</td>
+                    <td>N/A</td>
+                    <td>Accepted</td>
+                    <td>{{action.date || N/A}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- - - - - Logs End - - - - - -->
     </div>
   </div>
 
